@@ -1,2 +1,2 @@
-# social-media-app
-React Web App
+# movie-app
+React Movie App
