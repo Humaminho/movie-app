@@ -1,0 +1,52 @@
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  font-weight: 500;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--blue);
+}
+
+button {
+  border-radius: 50px;
+  border: 2px solid transparent;
+  margin: 0 0.6rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: var(--blue);
+  cursor: pointer;
+  transition: border-color 0.25s;
+  color: var(--white);
+
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+button:hover {
+  border: 2px solid var(--blue);
+  background-color: var(--blue-hover);
+  color: white;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+img {
+  object-fit: cover;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid red;
+  height: 100%;
+}
+
