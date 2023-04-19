@@ -82,19 +82,19 @@ export default function MainContent() {
 						<p className="big white">
 							{movie && movie.release_date
 								? movie.release_date.replace(/-/g, '/')
-								: 'Not found :('}
+								: "-- / -- / --"}
 						</p>
 					</div>
 					<div className="text-section">
 						<p className="blue">Description:</p>
 						<p className="description big white">
-							{movie && movie.overview}
+							{movie ? movie.overview : "No description :("}
 						</p>
 					</div>
 					<div className="text-section">
 						<p className="blue">Popularity:</p>
 						<p className="big white">
-							{movie && Math.floor(movie.popularity) + ' %'}
+							{movie ? Math.floor(movie.popularity) + ' %' : "0%"}
 						</p>
 					</div>
 				</div>
