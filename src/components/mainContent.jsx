@@ -4,7 +4,7 @@ import InfoSection from './infoSection';
 import DropDown from './dropdown';
 const log = console.log;
 
-export default function MainContent() {
+export default function MainContent({background, setBackground}) {
 
   const [request, setRequest] = useState('');
   const [searchInput, setSearchInput] = useState('Iron man 3')
@@ -14,12 +14,12 @@ export default function MainContent() {
   useEffect(() => {
     const apiKey = '67e2da4e137cc7ee4732edd315ed8cab';
 
-	  fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query='transcendance'`)
+	  fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query='Naruto'`)
 		.then((response) => response.json())
 		.then((data) => {
 			setMovie(data.results[0]);
 		})
-		.catch((error) => console.log(error));
+		.catch((error) => console.warn(error));
   }, []);
 
   function handleSubmit(e) {
@@ -33,17 +33,19 @@ export default function MainContent() {
       const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${req}`);
       const data = await response.json();
       return data;
-    } catch {
-      console.log(error);
+    } catch(error) {
+      console.warn(error);
     }
   }
 
   async function handleRequest() {
     try {
       const data = await fetchData(request);
-      data.results[0] ? setMovie(data.results[0]) : console.log('Not found.');
-    } catch {
-      console.log(error);
+      data.results[0] ? setMovie(data.results[0]) : console.warn('Not found.');
+      const path = (data.results[0].backdrop_path);
+      setBackground(`https://image.tmdb.org/t/p/w1280${path}`);
+    } catch(error) {
+      console.warn(error);
     }
   }
 
@@ -54,9 +56,8 @@ export default function MainContent() {
     try {
       const response = await fetchData(searchInput);
       setDropDownList(response.results);
-      log(dropDownList)
-    } catch {
-      console.log('list not retreived');
+    } catch(error) {
+      console.error('list not retreived');
     }
 
   }
@@ -70,24 +71,21 @@ export default function MainContent() {
 					type="search"
 					className="search"
 					value={request}
+					onClick={handleChange}
 					onChange={handleChange}
+					onBlur={() => setTimeout(() => setDropDownList([]), 100)}
 					placeholder="Name of the movie..."
 				/>
-        <div className="dropdown">
-          {dropDownList !== [] && dropDownList.filter((item) => {
-            const searchTerm = searchInput.toLowerCase();
-            const req = item.title.toLowerCase();
-            return req.startsWith(searchTerm) && searchInput !== "" && searchTerm !== req;
-          }).map((item) => {
-            return (
-              <li key={crypto.randomUUID()} onClick={() => {
-                setRequest(item.title);
-                setSearchInput(item.title);
-					      handleRequest();
-              }}>{item.title}</li>
-            )
-          })}
-        </div>
+
+				<DropDown
+					list={dropDownList}
+					setList={setDropDownList}
+					input={searchInput}
+					setInput={setSearchInput}
+					setRequest={setRequest}
+					handleRequest={handleRequest}
+				/>
+
 				<button
 					type="submit"
 					className="submit-search"
@@ -105,7 +103,7 @@ export default function MainContent() {
 					</svg>
 				</button>
 			</form>
-			<InfoSection movie = {movie}></InfoSection>
+			<InfoSection movie={movie}></InfoSection>
 		</div>
   );
 }

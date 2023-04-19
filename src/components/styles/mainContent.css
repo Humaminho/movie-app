@@ -39,6 +39,7 @@
 .info-section {
   display: flex;
   gap: 1rem;
+  z-index: 1;
 }
 .movie-photo {
   border-radius: 20px;

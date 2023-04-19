@@ -4,10 +4,24 @@ import Navbar from './navbar';
 import MainContent from './mainContent';
 
 export default function App() {
+
+  const [background, setBackground] = useState(
+		'https://image.tmdb.org/t/p/w1280/l8ubUlfzlB5R2j9cJ3CN7tj0gmd.jpg'
+  );
+
 	return (
-		<div className="app">
+		<div
+			className="app"
+			style={{
+				backgroundImage: `url(${background})`,
+			}}
+		>
+      <div className='layer'></div>
 			<Navbar></Navbar>
-			<MainContent></MainContent>
+			<MainContent
+				setBackground={setBackground}
+				background={background}
+			></MainContent>
 		</div>
 	);
 }

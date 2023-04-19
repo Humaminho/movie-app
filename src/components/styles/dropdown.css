@@ -1,6 +1,36 @@
 .dropdown {
   position: absolute;
-  top: 60px;
-  max-width: 500px;
-  background-color: rgb(0, 0, 0, 0.8);
+  top: 50px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  transition: all 250ms;
+  max-height: 230.15px;
+  overflow: hidden;
+
+  background-color: transparent;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 25px;
+    z-index: 2;
+}
+.drop-down-item {
+  list-style: none;
+  width: 600px;
+  font-size: 1.2rem;
+  padding: 0.6em 1.2em;
+  background-color: rgba(0, 0, 0, 0.95);
+  cursor: pointer;
+  transition: all 250ms;
+  outline: none;
+  color: var(--white);
+}
+.drop-down-item:hover {
+  background-color: black;
+  color: white;
+}
+.drop-down-item:first-child {
+  border-radius: 25px 25px 0 0;
+}
+.drop-down-item:last-child {
+  border-radius:  0 0 25px 25px;
 }
