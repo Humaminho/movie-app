@@ -1,2 +1,4 @@
 # movie-app
-React Movie App
+> React Movie App
+
+## Live demo: https://chillandnetflix.netlify.app/
