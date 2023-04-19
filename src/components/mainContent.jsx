@@ -4,7 +4,7 @@ import InfoSection from './infoSection';
 import DropDown from './dropdown';
 const log = console.log;
 
-export default function MainContent({background, setBackground}) {
+export default function MainContent({setLayer, setBackground}) {
 
   const [request, setRequest] = useState('');
   const [searchInput, setSearchInput] = useState('Iron man 3')
@@ -43,7 +43,12 @@ export default function MainContent({background, setBackground}) {
       const data = await fetchData(request);
       data.results[0] ? setMovie(data.results[0]) : console.warn('Not found.');
       const path = (data.results[0].backdrop_path);
+      setLayer('layer on');
+      setTimeout(() => {
       setBackground(`https://image.tmdb.org/t/p/w1280${path}`);
+			setLayer('layer');
+		}, 500);
+
     } catch(error) {
       console.warn(error);
     }
