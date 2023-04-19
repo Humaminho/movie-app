@@ -1,18 +1,24 @@
 import React from 'react'
 import './styles/dropdown.css'
 
-export default function DropDown({list, input, setInput, setRequest, handleRequest, setList}) {
-
-  return (
+export default function DropDown({
+	dropDownList,
+	setDropDownList,
+	searchInput,
+	setSearchInput,
+	setRequest,
+	handleRequest,
+}) {
+	return (
 		<div className="dropdown">
-			{list !== [] &&
-				list
+			{dropDownList !== [] &&
+				dropDownList
 					.filter((item) => {
-						const searchTerm = input.toLowerCase();
+						const searchTerm = searchInput.toLowerCase();
 						const req = item.title.toLowerCase();
 						return (
 							req.startsWith(searchTerm) &&
-							input !== '' &&
+							searchInput !== '' &&
 							searchTerm !== req
 						);
 					})
@@ -20,12 +26,12 @@ export default function DropDown({list, input, setInput, setRequest, handleReque
 						return (
 							<li
 								key={crypto.randomUUID()}
-                className='drop-down-item'
+								className="drop-down-item"
 								onClick={() => {
 									setRequest(item.title);
-									setInput(item.title);
+									setSearchInput(item.title);
 									handleRequest();
-                  setList([]);
+									setDropDownList([]);
 								}}
 							>
 								{item.title}
@@ -33,5 +39,5 @@ export default function DropDown({list, input, setInput, setRequest, handleReque
 						);
 					})}
 		</div>
-  );
+	);
 }

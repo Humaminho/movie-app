@@ -1,6 +1,12 @@
 import React from 'react'
 
 export default function InfoSection({movie}) {
+
+  function formatDate(date) {
+    const formated = date.split('-').reverse().join('/')
+    return formated;
+  }
+
   return (
 		<div className="info-section">
 			<img
@@ -21,9 +27,7 @@ export default function InfoSection({movie}) {
 				<div className="text-section">
 					<p className="blue">Release date:</p>
 					<p className="big white">
-						{movie && movie.release_date
-							? movie.release_date.replace(/-/g, '/')
-							: 'Not found :('}
+						{movie && movie.release_date ? formatDate(movie.release_date) : 'Ask chatGPT :('}
 					</p>
 				</div>
 				<div className="text-section">
