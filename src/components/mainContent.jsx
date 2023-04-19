@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './styles/mainContent.css'
+import InfoSection from './infoSection';
+import DropDown from './dropdown';
+const log = console.log;
 
 export default function MainContent() {
 
-  const [searchInput, setSearchInput] = useState('');
-  const [request, setRequest] = useState('Iron man 3')
+  const [request, setRequest] = useState('');
+  const [searchInput, setSearchInput] = useState('Iron man 3')
   const [movie, setMovie] = useState('');
+  const [dropDownList, setDropDownList] = useState([]);
 
   useEffect(() => {
     const apiKey = '67e2da4e137cc7ee4732edd315ed8cab';
@@ -23,15 +27,38 @@ export default function MainContent() {
     fetchData();
   }
 
-  function fetchData() {
+  async function fetchData(req) {
     const apiKey = '67e2da4e137cc7ee4732edd315ed8cab';
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${req}`);
+      const data = await response.json();
+      return data;
+    } catch {
+      console.log(error);
+    }
+  }
 
-	  fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchInput}`)
-		.then((response) => response.json())
-		.then((data) => {
-      data.results[0] ? setMovie(data.results[0]) : console.log('Not found.')
-    })
-		.catch((error) => console.log(error));
+  async function handleRequest() {
+    try {
+      const data = await fetchData(request);
+      data.results[0] ? setMovie(data.results[0]) : console.log('Not found.');
+    } catch {
+      console.log(error);
+    }
+  }
+
+  async function handleChange(e) {
+    setRequest(e.target.value);
+    setSearchInput(e.target.value);
+
+    try {
+      const response = await fetchData(searchInput);
+      setDropDownList(response.results);
+      log(dropDownList)
+    } catch {
+      console.log('list not retreived');
+    }
+
   }
 
 
@@ -42,14 +69,29 @@ export default function MainContent() {
 				<input
 					type="search"
 					className="search"
-					value={searchInput}
-					onChange={(e) => setSearchInput(e.target.value)}
+					value={request}
+					onChange={handleChange}
 					placeholder="Name of the movie..."
 				/>
+        <div className="dropdown">
+          {dropDownList !== [] && dropDownList.filter((item) => {
+            const searchTerm = searchInput.toLowerCase();
+            const req = item.title.toLowerCase();
+            return req.startsWith(searchTerm) && searchInput !== "" && searchTerm !== req;
+          }).map((item) => {
+            return (
+              <li key={crypto.randomUUID()} onClick={() => {
+                setRequest(item.title);
+                setSearchInput(item.title);
+					      handleRequest();
+              }}>{item.title}</li>
+            )
+          })}
+        </div>
 				<button
 					type="submit"
 					className="submit-search"
-					onClick={fetchData}
+					onClick={handleRequest}
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
@@ -63,42 +105,7 @@ export default function MainContent() {
 					</svg>
 				</button>
 			</form>
-			<div className="info-section">
-				<img
-					className="movie-photo"
-					src={
-						movie.poster_path ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path : './src/assets/notfound.png'
-					}
-					alt={movie && movie.title + ' poster picture'}
-					height="480px"
-					width="300px"
-				/>
-				<div className="movie-info">
-					<p className="movie-title">
-						{movie && movie.title && movie.title.toUpperCase()}
-					</p>
-					<div className="text-section">
-						<p className="blue">Release date:</p>
-						<p className="big white">
-							{movie && movie.release_date
-								? movie.release_date.replace(/-/g, '/')
-								: "-- / -- / --"}
-						</p>
-					</div>
-					<div className="text-section">
-						<p className="blue">Description:</p>
-						<p className="description big white">
-							{movie ? movie.overview : "No description :("}
-						</p>
-					</div>
-					<div className="text-section">
-						<p className="blue">Popularity:</p>
-						<p className="big white">
-							{movie ? Math.floor(movie.popularity) + ' %' : "0%"}
-						</p>
-					</div>
-				</div>
-			</div>
+			<InfoSection movie = {movie}></InfoSection>
 		</div>
   );
 }
