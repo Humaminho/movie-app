@@ -62,6 +62,7 @@ p {
   margin: 0;
 }
 .movie-title {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-size: 2rem;
   font-weight: bold;
   color: white;
