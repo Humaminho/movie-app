@@ -1,0 +1,6 @@
+.dropdown {
+  position: absolute;
+  top: 60px;
+  max-width: 500px;
+  background-color: rgb(0, 0, 0, 0.8);
+}
