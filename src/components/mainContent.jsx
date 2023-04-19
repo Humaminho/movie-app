@@ -10,11 +10,10 @@ export default function MainContent() {
   useEffect(() => {
     const apiKey = '67e2da4e137cc7ee4732edd315ed8cab';
 
-	  fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query='Iron man 3'`)
+	  fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query='transcendance'`)
 		.then((response) => response.json())
 		.then((data) => {
 			setMovie(data.results[0]);
-			console.log(data.results[0]);
 		})
 		.catch((error) => console.log(error));
   }, []);
@@ -30,8 +29,7 @@ export default function MainContent() {
 	  fetch(`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${searchInput}`)
 		.then((response) => response.json())
 		.then((data) => {
-      setMovie(data.results[0]);
-      console.log(data.results[0]);
+      data.results[0] ? setMovie(data.results[0]) : console.log('Not found.')
     })
 		.catch((error) => console.log(error));
   }
@@ -53,24 +51,52 @@ export default function MainContent() {
 					className="submit-search"
 					onClick={fetchData}
 				>
-					Look
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="20"
+						height="20"
+						fill="currentColor"
+						className="bi bi-search"
+						viewBox="0 0 16 16"
+					>
+						<path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+					</svg>
 				</button>
 			</form>
 			<div className="info-section">
 				<img
 					className="movie-photo"
-					src={"https://image.tmdb.org/t/p/w500"+movie.poster_path}
-					alt="dragon"
-					height="400px"
-					width="250px"
+					src={
+						movie.poster_path ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path : './src/assets/notfound.png'
+					}
+					alt={movie && movie.title + ' poster picture'}
+					height="480px"
+					width="300px"
 				/>
 				<div className="movie-info">
-					<p>{movie.original_title}</p>
-					<p>{movie.overview}</p>
-					<p>{movie.original_title}</p>
-					<p>{movie.original_title}</p>
-					<p>{movie.original_title}</p>
-					<p>{movie.original_title}</p>
+					<p className="movie-title">
+						{movie && movie.title && movie.title.toUpperCase()}
+					</p>
+					<div className="text-section">
+						<p className="blue">Release date:</p>
+						<p className="big white">
+							{movie && movie.release_date
+								? movie.release_date.replace(/-/g, '/')
+								: 'Not found :('}
+						</p>
+					</div>
+					<div className="text-section">
+						<p className="blue">Description:</p>
+						<p className="description big white">
+							{movie && movie.overview}
+						</p>
+					</div>
+					<div className="text-section">
+						<p className="blue">Popularity:</p>
+						<p className="big white">
+							{movie && Math.floor(movie.popularity) + ' %'}
+						</p>
+					</div>
 				</div>
 			</div>
 		</div>

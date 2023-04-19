@@ -7,12 +7,11 @@
 
 .search-section {
   display: flex;
-  gap: 1rem;
 }
 
 .search {
   width: 600px;
-  border-radius: 50px;
+  border-radius: 50px 0px 0px 50px;
   border: 1px solid transparent;
   font-size: 1.2rem;
   padding: 0.6em 1.2em;
@@ -28,6 +27,14 @@
   border-color: var(--blue);
 }
 
+.submit-search {
+  border-radius: 0px 50px 50px 0px;
+  border-left: 0px;
+}
+.submit-search:hover {
+  border-left: 0px;
+}
+
 .info-section {
   display: flex;
   gap: 1rem;
@@ -37,9 +44,60 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 .movie-info {
-  height: 400px;
-  width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: 480px;
+  width: 480px;
   background-color: rgb(24, 24, 24);
   border-radius: 20px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  padding: 1rem 2rem;
+  justify-content: flex-start;
+}
+
+p {
+  margin: 0;
+}
+.movie-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+}
+.blue {
+  color:var(--blue);
+  font-size: 1rem;
+}
+.big {
+  font-size: 1.5rem;
+}
+.description {
+  max-height: 200px;
+  overflow-y: scroll;
+  font-size: 1.3rem;
+  padding-right: .8rem;
+}
+.text-section {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.text-section:nth-child(4) {
+  margin-top: auto;
+  align-self: flex-end;
+  margin: auto 1rem 1rem 1rem;
+}
+
+.description::-webkit-scrollbar {
+  width: 10px;
+}
+ 
+.description::-webkit-scrollbar-track {
+  background: transparent;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.description::-webkit-scrollbar-thumb {
+  background-color: rgba(114, 114, 114, 0.252);
+  border-radius: 25px;
 }
