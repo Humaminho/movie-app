@@ -28,7 +28,7 @@
   border-color: var(--blue);
 }
 
-.submit-search {
+.submit {
   border-radius: 0px 50px 50px 0px;
   border-left: 0px;
 }
@@ -39,7 +39,6 @@
 .info-section {
   display: flex;
   gap: 1rem;
-  z-index: 1;
 }
 .movie-photo {
   border-radius: 20px;

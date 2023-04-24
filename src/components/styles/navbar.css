@@ -4,7 +4,6 @@
   align-items: center;
   justify-content: space-between;
   padding: .6rem 1rem;
-  z-index: 1;
   font-weight: bold;
 }
 
@@ -16,4 +15,16 @@
 
 .login {
   font-weight: bold;
+}
+
+.signup {
+  background-color: transparent;
+  box-shadow: none;
+  color: white;
+  border: none;
+}
+.signup:hover {
+  background-color: transparent;
+  border: none;
+  color: var(--blue);
 }

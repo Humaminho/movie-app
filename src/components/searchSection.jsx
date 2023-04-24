@@ -44,7 +44,7 @@ export default function SearchSection({
 
 			<button
 				type="submit"
-				className="submit-search"
+				className="submit"
 				onClick={handleRequest}
 			>
 				<svg

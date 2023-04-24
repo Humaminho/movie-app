@@ -7,7 +7,10 @@ export default function Navbar() {
 			<a href="https://chillandnetflix.netlify.app/" className="logo">
 				Netflix zr9a
 			</a>
-			<button className="login">Login</button>
+			<div className='log'>
+        <button className="login">Login</button>
+        <button className="signup">Sign-up</button>
+      </div>
 		</nav>
   );
 }
