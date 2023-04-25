@@ -17,13 +17,13 @@
   font-weight: bold;
 }
 
-.signup {
+.no-border-button {
   background-color: transparent;
   box-shadow: none;
   color: white;
   border: none;
 }
-.signup:hover {
+.no-border-button:hover {
   background-color: transparent;
   border: none;
   color: var(--blue);

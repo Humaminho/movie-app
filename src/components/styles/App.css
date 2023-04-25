@@ -24,9 +24,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
   color: var(--white);
+  outline: none;
 
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
+
 button:hover {
   border: 1px solid var(--blue);
   background-color: var(--blue-hover);
@@ -34,7 +36,7 @@ button:hover {
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: none;
 }
 
 img {

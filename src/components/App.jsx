@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import './styles/App.css';
 import Navbar from './navbar';
 import MainContent from './mainContent';
-import Login from './Signup';
+import Signup from './Signup';
+import Login from './Login';
 
 export default function App() {
 
@@ -12,7 +13,8 @@ export default function App() {
 
   const [layer, setLayer] = useState("layer");
   const [logState, setLogState] = useState(false);
-  const [windowState, setWindowState] = useState("movie");
+  const [popUpSignupState, setPopUpSignupState] = useState(false);
+  const [popUpLoginState, setPopUpLoginState] = useState(false);
 
   // function checkWindow() {
   //   if ( windowState === 'movie' ) {
@@ -37,12 +39,28 @@ export default function App() {
 				}}
 			></div>
 			<div className={layer}></div>
-			<Navbar></Navbar>
+			<Navbar
+				logState={logState}
+				setSignupPopUpState={setPopUpSignupState}
+				setLoginPopUpState={setPopUpLoginState}
+			></Navbar>
 			<MainContent
 				setBackground={setBackground}
 				background={background}
 				setLayer={setLayer}
 			/>
+			{popUpSignupState && (
+				<Signup
+					setPopUpSignupState={setPopUpSignupState}
+					setPopUpLoginState={setPopUpLoginState}
+				/>
+			)}
+			{popUpLoginState && (
+				<Login
+					setPopUpSignupState={setPopUpSignupState}
+					setPopUpLoginState={setPopUpLoginState}
+				/>
+			)}
 		</div>
 	);
 }

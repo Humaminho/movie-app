@@ -1,28 +1,38 @@
 import React, { useState } from 'react'
-import './styles/Signup.css'
+import './styles/Log.css'
 import { app, auth } from './firebase-config.jsx'
 import { createUserWithEmailAndPassword as createUser} from 'firebase/auth'
 
-export default function Signup() {
+export default function Signup({ setPopUpSignupState, setPopUpLoginState }) {
+	const [email, setEmail] = useState('');
+	const [password, setPassword] = useState('');
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('');
-
-  function handleSignup(e) {
+	function handleSignup(e) {
+		e.preventDefault();
+		createUser(auth, email, password)
+			.then((cred) => {
+				console.log('User created', cred.user);
+				setEmail('');
+				setPassword('');
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}
+  function swap(e) {
     e.preventDefault();
-    createUser(auth, email, password)
-      .then((cred) => {
-        console.log('User created', cred.user);
-        setEmail('');
-        setPassword('');
-      })
-      .catch((err) => {
-        console.log(err);
-      })
+    setPopUpSignupState(false);
+    setPopUpLoginState(true);
+  }
+  function closePopUp() {
+		setPopUpSignupState(false);
   }
 
-  return (
+	return (
 		<form className="login-form">
+			<div className="close" onClick={closePopUp}>
+				✖ 
+			</div>
 			<label htmlFor="email">
 				<p className="label">Email:</p>
 				<input
@@ -31,7 +41,7 @@ export default function Signup() {
 					name="email"
 					id="email"
 					onChange={(e) => setEmail(e.target.value)}
-          value={email}
+					value={email}
 				/>
 			</label>
 			<label htmlFor="password">
@@ -42,12 +52,15 @@ export default function Signup() {
 					name="password"
 					id="password"
 					onChange={(e) => setPassword(e.target.value)}
-          value={password}
+					value={password}
 				/>
 			</label>
-			<button onClick={handleSignup} className="Sign-up">
+			<button onClick={handleSignup} className="Sign-up" type="submit">
 				Sign-up
 			</button>
+			<button className="no-border-button" onClick={swap}>
+				Have an account already? Login
+			</button>
 		</form>
-  );
+	);
 }
