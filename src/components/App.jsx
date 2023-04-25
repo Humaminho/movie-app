@@ -41,6 +41,7 @@ export default function App() {
 			<div className={layer}></div>
 			<Navbar
 				logState={logState}
+        setLogState={setLogState}
 				setSignupPopUpState={setPopUpSignupState}
 				setLoginPopUpState={setPopUpLoginState}
 			></Navbar>
@@ -53,12 +54,14 @@ export default function App() {
 				<Signup
 					setPopUpSignupState={setPopUpSignupState}
 					setPopUpLoginState={setPopUpLoginState}
+					setLogState={setLogState}
 				/>
 			)}
 			{popUpLoginState && (
 				<Login
 					setPopUpSignupState={setPopUpSignupState}
 					setPopUpLoginState={setPopUpLoginState}
+					setLogState={setLogState}
 				/>
 			)}
 		</div>

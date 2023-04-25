@@ -1,19 +1,33 @@
 import React, { useState } from 'react';
-import './styles/Log.css';
-import { app, auth } from './firebase-config.jsx';
-import { createUserWithEmailAndPassword as createUser } from 'firebase/auth';
+import './styles/Forms.css';
+import { signInWithEmailAndPassword as signIn } from 'firebase/auth';
+import { auth } from './firebase-config.jsx'
 
-export default function Login({ setPopUpSignupState, setPopUpLoginState }) {
+export default function Login({ setLogState, setPopUpSignupState, setPopUpLoginState }) {
 	const [loginEmail, setLoginEmail] = useState('');
 	const [loginPassword, setLoginPassword] = useState('');
 
 	function handleLogin(e) {
 		e.preventDefault();
+    signIn(auth, loginEmail, loginPassword)
+      .then((cred) => {
+        setLogState(true);
+        console.log(cred.user);
+        console.log('logged in')
+        setLoginEmail('');
+        setLoginPassword('');
+        closePopUp();
+      })
+      .catch((err) => {
+        console.info(err)
+      })
 	}
+
 	function swap() {
 		setPopUpSignupState(true);
 		setPopUpLoginState(false);
 	}
+
   function closePopUp() {
     setPopUpLoginState(false);
   }
@@ -32,6 +46,7 @@ export default function Login({ setPopUpSignupState, setPopUpLoginState }) {
 					id="email"
 					onChange={(e) => setLoginEmail(e.target.value)}
 					value={loginEmail}
+					placeholder="example@gmail.com"
 				/>
 			</label>
 			<label htmlFor="password">
@@ -43,6 +58,7 @@ export default function Login({ setPopUpSignupState, setPopUpLoginState }) {
 					id="password"
 					onChange={(e) => setLoginPassword(e.target.value)}
 					value={loginPassword}
+					placeholder="missi2023"
 				/>
 			</label>
 			<button onClick={handleLogin} className="Sign-up">
