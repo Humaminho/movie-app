@@ -1,0 +1,13 @@
+    <div className="main">
+			<SearchSection
+				dropDownList={dropDownList}
+				setDropDownList={setDropDownList}
+				searchInput={searchInput}
+				setSearchInput={setSearchInput}
+				setRequest={setRequest}
+				handleRequest={handleRequest}
+				handleChange={handleChange}
+				request={request}
+			/>
+			<InfoSection movie={movie}></InfoSection>
+		</div>

@@ -1,4 +1,5 @@
 import React from 'react';
+import SignInWithGoogle from './SignInWithGoogle';
 
 export default function LogButtons({
 	setLoginPopUpState,
@@ -24,6 +25,7 @@ export default function LogButtons({
 			>
 				Sign-up
 			</button>
+			<SignInWithGoogle />
 		</div>
 	);
 }

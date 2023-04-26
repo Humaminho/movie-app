@@ -9,6 +9,9 @@ export default function MainContent({ setLayer, setBackground }) {
 	const [searchInput, setSearchInput] = useState('');
 	const [movie, setMovie] = useState('');
 	const [dropDownList, setDropDownList] = useState([]);
+	const [movieId, setMovieId] = useState('');
+	const [watchList, setWatchList] = useState([317442, 27205]);
+	const [movieData, setMovieData] = useState(null);
 
 	useEffect(() => {
 		fetchData('Naruto')
@@ -58,6 +61,28 @@ export default function MainContent({ setLayer, setBackground }) {
 		} catch (error) {
 			console.warn('Error: list not retreived');
 		}
+	}
+
+	useEffect(() => {
+		{
+			fetchMovieDataForIds(watchList);
+		}
+	}, []);
+
+	function fetchMovieData(id) {
+		const apiKey = '67e2da4e137cc7ee4732edd315ed8cab';
+		return fetch(
+			`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`
+		)
+			.then((response) => response.json())
+			.then((data) => data)
+			.catch((error) => console.log(error));
+	}
+
+	async function fetchMovieDataForIds(ids) {
+		const promises = ids.map((id) => fetchMovieData(id));
+		const results = await Promise.all(promises);
+		return results;
 	}
 
 	return (

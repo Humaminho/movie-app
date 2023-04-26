@@ -35,10 +35,8 @@ export default function App() {
 	useEffect(() => {
 		if (user) {
 			setLogState(true);
-			console.log(`Log state: ${logState}`);
 		} else {
 			setLogState(false);
-			console.log(`Log state: ${logState}`);
 		}
 	}, [user]);
 
