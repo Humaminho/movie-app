@@ -1,26 +1,41 @@
 import React, { useState } from 'react';
 import './styles/Forms.css';
-import { signInWithEmailAndPassword as signIn } from 'firebase/auth';
-import { auth } from './firebase-config.jsx'
+import {
+	signInWithEmailAndPassword as signIn,
+	setPersistence,
+	browserLocalPersistence,
+} from 'firebase/auth';
+import { auth } from './firebase-config.jsx';
 
-export default function Login({ setLogState, setPopUpSignupState, setPopUpLoginState }) {
+export default function Login({
+	setLogState,
+	setPopUpSignupState,
+	setPopUpLoginState,
+}) {
 	const [loginEmail, setLoginEmail] = useState('');
 	const [loginPassword, setLoginPassword] = useState('');
 
 	function handleLogin(e) {
 		e.preventDefault();
-    signIn(auth, loginEmail, loginPassword)
-      .then((cred) => {
-        setLogState(true);
-        console.log(cred.user);
-        console.log('logged in')
-        setLoginEmail('');
-        setLoginPassword('');
-        closePopUp();
-      })
-      .catch((err) => {
-        console.info(err)
-      })
+		setPersistence(auth, browserLocalPersistence)
+			.then(() => {
+				signIn(auth, loginEmail, loginPassword)
+					.then((cred) => {
+						setLogState(true);
+						console.log(cred.user);
+						console.log('logged in');
+						setLoginEmail('');
+						setLoginPassword('');
+						closePopUp();
+					})
+					.catch((err) => {
+						console.info(err);
+					});
+				console.log('Setting persistence succeded');
+			})
+			.catch((err) => {
+				console.info(`Setting persistence failed: ${err}`);
+			});
 	}
 
 	function swap() {
@@ -28,9 +43,9 @@ export default function Login({ setLogState, setPopUpSignupState, setPopUpLoginS
 		setPopUpLoginState(false);
 	}
 
-  function closePopUp() {
-    setPopUpLoginState(false);
-  }
+	function closePopUp() {
+		setPopUpLoginState(false);
+	}
 
 	return (
 		<form className="login-form">

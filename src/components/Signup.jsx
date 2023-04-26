@@ -1,41 +1,44 @@
-import React, { useState } from 'react'
-import './styles/Forms.css'
-import { auth } from './firebase-config.jsx'
-import { createUserWithEmailAndPassword as createUser} from 'firebase/auth'
+import React, { useState } from 'react';
+import './styles/Forms.css';
+import { auth } from './firebase-config.jsx';
+import { createUserWithEmailAndPassword as createUser } from 'firebase/auth';
 
-export default function Signup({ setPopUpSignupState, setPopUpLoginState, setLogState }) {
-
-  const [email, setEmail] = useState('');
+export default function Signup({
+	setPopUpSignupState,
+	setPopUpLoginState,
+	setLogState,
+}) {
+	const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
-  const [passConfirm, setPassConfirm] = useState('');
+	const [passConfirm, setPassConfirm] = useState('');
 
 	function handleSignup(e) {
 		e.preventDefault();
-    if ( password === passConfirm ) {
-      createUser(auth, email, password)
-        .then((cred) => {
-          console.log('User created', cred.user);
-          setEmail('');
-          setPassword('');
-          setPassConfirm('');
-          closePopUp();
-          setLogState(true);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      alert("Passwords don't match");
-    }
+		if (password === passConfirm) {
+			createUser(auth, email, password)
+				.then((cred) => {
+					console.log('User created', cred.user.email);
+					setEmail('');
+					setPassword('');
+					setPassConfirm('');
+					closePopUp();
+					setLogState(true);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+		} else {
+			alert("Passwords don't match");
+		}
 	}
-  function swap(e) {
-    e.preventDefault();
-    setPopUpSignupState(false);
-    setPopUpLoginState(true);
-  }
-  function closePopUp() {
+	function swap(e) {
+		e.preventDefault();
 		setPopUpSignupState(false);
-  }
+		setPopUpLoginState(true);
+	}
+	function closePopUp() {
+		setPopUpSignupState(false);
+	}
 
 	return (
 		<form className="login-form">

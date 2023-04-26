@@ -1,13 +1,12 @@
-import React from 'react'
+import React from 'react';
 
-export default function InfoSection({movie}) {
+export default function InfoSection({ movie }) {
+	function formatDate(date) {
+		const formated = date.split('-').reverse().join('/');
+		return formated;
+	}
 
-  function formatDate(date) {
-    const formated = date.split('-').reverse().join('/')
-    return formated;
-  }
-
-  return (
+	return (
 		<div className="info-section">
 			<img
 				className="movie-photo"
@@ -27,7 +26,9 @@ export default function InfoSection({movie}) {
 				<div className="text-section">
 					<p className="blue">Release date:</p>
 					<p className="big white">
-						{movie && movie.release_date ? formatDate(movie.release_date) : 'Ask chatGPT :('}
+						{movie && movie.release_date
+							? formatDate(movie.release_date)
+							: 'Ask chatGPT :('}
 					</p>
 				</div>
 				<div className="text-section">
@@ -44,5 +45,5 @@ export default function InfoSection({movie}) {
 				</div>
 			</div>
 		</div>
-  );
+	);
 }

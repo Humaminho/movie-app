@@ -1,7 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-export default function LogButtons({ setLoginPopUpState, setSignupPopUpState }) {
-
+export default function LogButtons({
+	setLoginPopUpState,
+	setSignupPopUpState,
+}) {
 	return (
 		<div className="log">
 			<button

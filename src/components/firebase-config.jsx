@@ -1,7 +1,6 @@
-
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth'
-
+import { getAuth } from 'firebase/auth';
+import { getFirestore, collection } from 'firebase/firestore';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyAMpb0M2PtoWI0FBDnsyLMxlQa7In0RSeY',
@@ -15,4 +14,10 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-export { app, auth }
+const db = getFirestore();
+
+// grab collection reference:
+
+const colRef = collection(db, 'watchlist');
+
+export { app, auth };

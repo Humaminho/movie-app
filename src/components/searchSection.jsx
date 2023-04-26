@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import DropDown from './dropdown';
 
 export default function SearchSection({
@@ -8,18 +8,17 @@ export default function SearchSection({
 	setSearchInput,
 	setRequest,
 	handleRequest,
-  handleChange,
-  request,
+	handleChange,
+	request,
 }) {
-
-  function handleSubmit(e) {
+	function handleSubmit(e) {
 		e.preventDefault();
-    const title = dropDownList[0].title;
+		const title = dropDownList[0].title;
 		setRequest(title);
 		setSearchInput(title);
 		handleRequest();
 		setDropDownList([]);
-  }
+	}
 
 	return (
 		<form className="search-section" onSubmit={handleSubmit}>
@@ -42,11 +41,7 @@ export default function SearchSection({
 				handleRequest={handleRequest}
 			/>
 
-			<button
-				type="submit"
-				className="submit"
-				onClick={handleRequest}
-			>
+			<button type="submit" className="submit" onClick={handleRequest}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="20"
