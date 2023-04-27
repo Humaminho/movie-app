@@ -3,7 +3,15 @@ import './styles/mainContent.css';
 import InfoSection from './infoSection';
 import SearchSection from './searchSection';
 import { auth, db } from './firebase-config';
-import { collection, getDocs, addDoc, doc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import {
+	collection,
+	getDoc,
+	addDoc,
+	doc,
+	updateDoc,
+	setDoc,
+} from 'firebase/firestore';
 const log = console.log;
 
 export default function MainContent({ setLayer, setBackground, user }) {
@@ -13,25 +21,38 @@ export default function MainContent({ setLayer, setBackground, user }) {
 	const [dropDownList, setDropDownList] = useState([]);
 	const [movieData, setMovieData] = useState([]);
 
-	async function getData() {}
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				const userId = user.uid;
+				getData(userId);
+				saveData(userId);
+			} else return;
+		});
+	}, [movieData]);
 
-	async function saveData() {
-    const userId = user;
-    console.log(userId)
+	async function getData(userId) {
+		const dataRef = doc(db, 'watchlist', userId);
+		getDoc(dataRef)
+			.then((snapshot) => {
+				if (snapshot.exists()) {
+					console.log(snapshot.data().movie);
+				} else console.log('snapshot not found');
+			})
+			.catch((err) => console.info(err));
+	}
+
+	async function saveData(userId) {
+		console.log(userId);
 		try {
 			const watchListRef = doc(db, 'watchlist', userId);
-			await updateDoc(watchListRef, { movieData });
+			await setDoc(watchListRef, { movie: movieData });
 			console.log('saved to database');
-		} catch {
+		} catch (err) {
+			console.info(err);
 			console.info('failed to save');
 		}
 	}
-
-	useEffect(() => {
-		saveData();
-	}, [movieData]);
-
-	useEffect(() => {}, [movieData]);
 
 	useEffect(() => {
 		fetchData('Naruto')
