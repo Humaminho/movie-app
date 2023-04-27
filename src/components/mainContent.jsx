@@ -2,16 +2,36 @@ import React, { useEffect, useState } from 'react';
 import './styles/mainContent.css';
 import InfoSection from './infoSection';
 import SearchSection from './searchSection';
+import { auth, db } from './firebase-config';
+import { collection, getDocs, addDoc, doc } from 'firebase/firestore';
 const log = console.log;
 
-export default function MainContent({ setLayer, setBackground }) {
+export default function MainContent({ setLayer, setBackground, user }) {
 	const [request, setRequest] = useState('');
 	const [searchInput, setSearchInput] = useState('');
 	const [movie, setMovie] = useState('');
 	const [dropDownList, setDropDownList] = useState([]);
-	const [movieId, setMovieId] = useState('');
-	const [watchList, setWatchList] = useState([317442, 27205]);
-	const [movieData, setMovieData] = useState(null);
+	const [movieData, setMovieData] = useState([]);
+
+	async function getData() {}
+
+	async function saveData() {
+    const userId = user;
+    console.log(userId)
+		try {
+			const watchListRef = doc(db, 'watchlist', userId);
+			await updateDoc(watchListRef, { movieData });
+			console.log('saved to database');
+		} catch {
+			console.info('failed to save');
+		}
+	}
+
+	useEffect(() => {
+		saveData();
+	}, [movieData]);
+
+	useEffect(() => {}, [movieData]);
 
 	useEffect(() => {
 		fetchData('Naruto')
@@ -63,26 +83,15 @@ export default function MainContent({ setLayer, setBackground }) {
 		}
 	}
 
-	useEffect(() => {
-		{
-			fetchMovieDataForIds(watchList);
-		}
-	}, []);
-
-	function fetchMovieData(id) {
+	function returnMovieData(id) {
 		const apiKey = '67e2da4e137cc7ee4732edd315ed8cab';
-		return fetch(
-			`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`
-		)
+		fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
 			.then((response) => response.json())
-			.then((data) => data)
+			.then((data) => {
+				setMovieData([...movieData, data]);
+				console.log(data);
+			})
 			.catch((error) => console.log(error));
-	}
-
-	async function fetchMovieDataForIds(ids) {
-		const promises = ids.map((id) => fetchMovieData(id));
-		const results = await Promise.all(promises);
-		return results;
 	}
 
 	return (
@@ -97,7 +106,11 @@ export default function MainContent({ setLayer, setBackground }) {
 				handleChange={handleChange}
 				request={request}
 			/>
-			<InfoSection movie={movie}></InfoSection>
+			<InfoSection
+				movie={movie}
+				movieData={movieData}
+				setMovieData={setMovieData}
+			></InfoSection>
 		</div>
 	);
 }

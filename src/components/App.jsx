@@ -56,6 +56,7 @@ export default function App() {
 				setLoginPopUpState={setPopUpLoginState}
 			></Navbar>
 			<MainContent
+				user={user}
 				setBackground={setBackground}
 				background={background}
 				setLayer={setLayer}

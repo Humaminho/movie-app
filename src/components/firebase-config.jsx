@@ -21,4 +21,4 @@ const db = getFirestore();
 
 const colRef = collection(db, 'watchlist');
 
-export { app, auth, provider, db };
+export { app, auth, provider, db, collection };
