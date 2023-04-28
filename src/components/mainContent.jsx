@@ -14,19 +14,26 @@ import {
 } from 'firebase/firestore';
 const log = console.log;
 
-export default function MainContent({ setLayer, setBackground, user }) {
+export default function MainContent({ setLayer, setBackground, user, movieData, setMovieData }) {
 	const [request, setRequest] = useState('');
 	const [searchInput, setSearchInput] = useState('');
 	const [movie, setMovie] = useState('');
 	const [dropDownList, setDropDownList] = useState([]);
-	const [movieData, setMovieData] = useState([]);
 
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 				const userId = user.uid;
 				getData(userId);
-				saveData(userId);
+			} else return;
+		});
+	}, []);
+
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				const userId = user.uid;
+				setTimeout(() => saveData(userId), 2000);
 			} else return;
 		});
 	}, [movieData]);
@@ -37,13 +44,13 @@ export default function MainContent({ setLayer, setBackground, user }) {
 			.then((snapshot) => {
 				if (snapshot.exists()) {
 					console.log(snapshot.data().movie);
-				} else console.log('snapshot not found');
+          setMovieData(snapshot.data().movie);
+				} else console.info('snapshot not found');
 			})
 			.catch((err) => console.info(err));
 	}
 
 	async function saveData(userId) {
-		console.log(userId);
 		try {
 			const watchListRef = doc(db, 'watchlist', userId);
 			await setDoc(watchListRef, { movie: movieData });

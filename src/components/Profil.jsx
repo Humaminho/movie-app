@@ -1,6 +1,7 @@
 import React from 'react';
 import { signOut } from 'firebase/auth';
 import { auth } from './firebase-config.jsx';
+import { Link } from 'react-router-dom';
 
 export default function Profil({ setLogState }) {
 	function handleProfilClick() {
@@ -16,7 +17,11 @@ export default function Profil({ setLogState }) {
 
 	return (
 		<div>
-			<button className="watch-list no-border-button">Watch list</button>
+			<Link to="/watchlist">
+				<button className="watch-list no-border-button">
+					Watch list
+				</button>
+			</Link>
 			<button
 				className="profil no-border-button"
 				onClick={handleProfilClick}

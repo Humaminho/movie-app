@@ -6,6 +6,8 @@ import Navbar from './navbar';
 import MainContent from './mainContent';
 import Signup from './Signup';
 import Login from './Login';
+import Watchlist from './Watchlist';
+import { Route, Routes } from 'react-router-dom';
 
 export default function App() {
 	const [background, setBackground] = useState(
@@ -18,6 +20,8 @@ export default function App() {
 
 	const [popUpSignupState, setPopUpSignupState] = useState(false);
 	const [popUpLoginState, setPopUpLoginState] = useState(false);
+
+	const [movieData, setMovieData] = useState([]);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -55,12 +59,25 @@ export default function App() {
 				setSignupPopUpState={setPopUpSignupState}
 				setLoginPopUpState={setPopUpLoginState}
 			></Navbar>
-			<MainContent
-				user={user}
-				setBackground={setBackground}
-				background={background}
-				setLayer={setLayer}
-			/>
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<MainContent
+							user={user}
+							setBackground={setBackground}
+							background={background}
+							setLayer={setLayer}
+							movieData={movieData}
+              setMovieData={setMovieData}
+						/>
+					}
+				/>
+				<Route
+					path="/watchlist"
+					element={<Watchlist movieData={movieData} />}
+				/>
+			</Routes>
 			{popUpSignupState && (
 				<Signup
 					setPopUpSignupState={setPopUpSignupState}

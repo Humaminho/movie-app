@@ -2,6 +2,7 @@ import React from 'react';
 import './styles/navbar.css';
 import Log from './LogButtons';
 import Profil from './Profil';
+import { Link } from 'react-router-dom';
 
 export default function Navbar({
 	logState,
@@ -11,14 +12,9 @@ export default function Navbar({
 }) {
 	return (
 		<nav className="navbar">
-			<a
-				/*href="https://chillandnetflix.netlify.app/"*/ onClick={() =>
-					console.log(logState)
-				}
-				className="logo"
-			>
+			<Link to="/" className="logo">
 				Netflix zr9a
-			</a>
+			</Link>
 			{logState ? (
 				<Profil setLogState={setLogState} />
 			) : (
