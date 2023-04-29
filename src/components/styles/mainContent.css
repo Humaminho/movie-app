@@ -66,6 +66,7 @@ p {
   font-size: 2rem;
   font-weight: bold;
   color: white;
+  margin-right: 2rem;
 }
 .blue {
   color:var(--blue);

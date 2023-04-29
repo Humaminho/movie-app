@@ -1,0 +1,22 @@
+.watchlist {
+	align-self: center;
+	border-radius: 25px;
+	width: 60%;
+	background-color: var(--black);
+	border-radius: 20px;
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.watchlist-movies {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  gap: 1rem;
+}
+.watchlist-movie {
+  display: flex;
+  position: relative;
+}

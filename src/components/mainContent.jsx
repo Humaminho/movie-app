@@ -14,17 +14,28 @@ import {
 } from 'firebase/firestore';
 const log = console.log;
 
-export default function MainContent({ setLayer, setBackground, user, movieData, setMovieData }) {
+export default function MainContent({
+	setLayer,
+	setBackground,
+	user,
+	movieData,
+	setMovieData,
+	addToWatchList,
+	removeFromWatchList,
+	checkIfFavorite,
+}) {
 	const [request, setRequest] = useState('');
 	const [searchInput, setSearchInput] = useState('');
 	const [movie, setMovie] = useState('');
 	const [dropDownList, setDropDownList] = useState([]);
+	const [localSave, setlocalSave] = useState(false);
 
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
 				const userId = user.uid;
 				getData(userId);
+				setlocalSave(true);
 			} else return;
 		});
 	}, []);
@@ -32,8 +43,10 @@ export default function MainContent({ setLayer, setBackground, user, movieData, 
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
-				const userId = user.uid;
-				setTimeout(() => saveData(userId), 2000);
+				if (localSave) {
+					const userId = user.uid;
+					saveData(userId);
+				} else return;
 			} else return;
 		});
 	}, [movieData]);
@@ -44,7 +57,7 @@ export default function MainContent({ setLayer, setBackground, user, movieData, 
 			.then((snapshot) => {
 				if (snapshot.exists()) {
 					console.log(snapshot.data().movie);
-          setMovieData(snapshot.data().movie);
+					setMovieData(snapshot.data().movie);
 				} else console.info('snapshot not found');
 			})
 			.catch((err) => console.info(err));
@@ -138,6 +151,9 @@ export default function MainContent({ setLayer, setBackground, user, movieData, 
 				movie={movie}
 				movieData={movieData}
 				setMovieData={setMovieData}
+				addToWatchList={addToWatchList}
+				removeFromWatchList={removeFromWatchList}
+				checkIfFavorite={checkIfFavorite}
 			></InfoSection>
 		</div>
 	);

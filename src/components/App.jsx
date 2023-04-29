@@ -44,6 +44,24 @@ export default function App() {
 		}
 	}, [user]);
 
+	function addToWatchList(movie) {
+		const newMovieData = [...movieData, movie];
+		setMovieData(newMovieData);
+	}
+
+	function removeFromWatchList(movie) {
+		const newMovieData = movieData.filter((item) => item.id !== movie.id);
+		setMovieData(newMovieData);
+	}
+
+	function checkIfFavorite(movie) {
+		for (let i = 0; i < movieData.length; i++) {
+			if (movieData[i].id === movie.id) {
+				return true;
+			}
+		}
+	}
+
 	return (
 		<div className="app">
 			<div
@@ -69,13 +87,24 @@ export default function App() {
 							background={background}
 							setLayer={setLayer}
 							movieData={movieData}
-              setMovieData={setMovieData}
+							setMovieData={setMovieData}
+							addToWatchList={addToWatchList}
+							removeFromWatchList={removeFromWatchList}
+							checkIfFavorite={checkIfFavorite}
 						/>
 					}
 				/>
 				<Route
 					path="/watchlist"
-					element={<Watchlist movieData={movieData} />}
+					element={
+						<Watchlist
+							movieData={movieData}
+							setMovieData={setMovieData}
+							addToWatchList={addToWatchList}
+							removeFromWatchList={removeFromWatchList}
+							checkIfFavorite={checkIfFavorite}
+						/>
+					}
 				/>
 			</Routes>
 			{popUpSignupState && (

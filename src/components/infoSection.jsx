@@ -1,27 +1,16 @@
 import React from 'react';
 
-export default function InfoSection({ movie, movieData, setMovieData }) {
+export default function InfoSection({
+	movie,
+	movieData,
+	setMovieData,
+	addToWatchList,
+	removeFromWatchList,
+	checkIfFavorite,
+}) {
 	function formatDate(date) {
 		const formated = date.split('-').reverse().join('/');
 		return formated;
-	}
-
-	function addToWatchList() {
-		const newMovieData = [...movieData, movie];
-		setMovieData(newMovieData);
-	}
-
-	function removeFromWatchList() {
-		const newMovieData = movieData.filter((item) => item.id !== movie.id);
-		setMovieData(newMovieData);
-	}
-
-	function checkIfFavorite(movie) {
-		for (let i = 0; i < movieData.length; i++) {
-			if (movieData[i].id === movie.id) {
-				return true;
-			}
-		}
 	}
 
 	return (
