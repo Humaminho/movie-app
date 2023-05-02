@@ -23,4 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 .env.local
-src/components/firebase.config.jsx
+src/components/firebase.config.js
+```
