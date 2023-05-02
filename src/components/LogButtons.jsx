@@ -25,7 +25,6 @@ export default function LogButtons({
 			>
 				Sign-up
 			</button>
-			<SignInWithGoogle />
 		</div>
 	);
 }

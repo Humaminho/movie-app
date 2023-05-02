@@ -1,22 +1,51 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './styles/Watchlist.css';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase-config';
 
 export default function Watchlist({
 	movieData,
-	setMovieData,
 	addToWatchList,
 	removeFromWatchList,
 	checkIfFavorite,
+	saveData,
+	getData,
+	localSave,
+	setlocalSave,
 }) {
-	console.log(movieData);
+	function formatDate(date) {
+		const formated = date.split('-').reverse().join('/');
+		return formated;
+	}
 
 	movieData.map((movie) => {
 		console.log(movie.title);
 	});
 
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				const userId = user.uid;
+				getData(userId);
+				setlocalSave(true);
+			} else return;
+		});
+	}, []);
+
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				if (localSave) {
+					const userId = user.uid;
+					saveData(userId);
+				} else return;
+			} else return;
+		});
+	}, [movieData]);
+
 	return (
 		<div className="watchlist">
-			<h1>Watchlist</h1>
+			<h1>Watch list</h1>
 			<ul className="watchlist-movies">
 				{movieData.map((movie) => (
 					<li key={movie.id} className="watchlist-movie">
@@ -30,8 +59,25 @@ export default function Watchlist({
 							alt={movie.title}
 							height={'200px'}
 						/>
-						<div className="watchlist-movieInfo">
-							<h3>{movie.title}</h3>
+						<div className="watchlist-movie-info">
+							<p className="movie-title">
+								{movie && movie.title.toUpperCase()}
+							</p>
+							<div className="text-section">
+								<p className="blue">Release date:</p>
+								<p className="big white">
+									{movie && movie.release_date
+										? formatDate(movie.release_date)
+										: 'Ask chatGPT :('}
+								</p>
+							</div>
+							<div className="text-section">
+								<p className="blue">Popularity:</p>
+								<p className="big white">
+									{movie &&
+										Math.floor(movie.popularity) + ' %'}
+								</p>
+							</div>
 						</div>
 						{checkIfFavorite(movie) ? (
 							<svg

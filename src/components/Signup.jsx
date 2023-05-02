@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './styles/Forms.css';
+import SignInWithGoogle from './SignInWithGoogle';
 import { auth } from './firebase-config.jsx';
 import {
 	createUserWithEmailAndPassword as createUser,
@@ -52,7 +53,7 @@ export default function Signup({
 	}
 
 	return (
-		<form className="login-form">
+		<form className="login-form" onSubmit={(e) => e.preventDefault()}>
 			<div className="close" onClick={closePopUp}>
 				✖
 			</div>
@@ -98,6 +99,7 @@ export default function Signup({
 			<button className="no-border-button" onClick={swap}>
 				Have an account already? Login
 			</button>
+			<SignInWithGoogle />
 		</form>
 	);
 }

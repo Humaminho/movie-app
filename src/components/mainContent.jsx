@@ -2,33 +2,27 @@ import React, { useEffect, useState } from 'react';
 import './styles/mainContent.css';
 import InfoSection from './infoSection';
 import SearchSection from './searchSection';
-import { auth, db } from './firebase-config';
+import { auth } from './firebase-config';
 import { onAuthStateChanged } from 'firebase/auth';
-import {
-	collection,
-	getDoc,
-	addDoc,
-	doc,
-	updateDoc,
-	setDoc,
-} from 'firebase/firestore';
 const log = console.log;
 
 export default function MainContent({
 	setLayer,
 	setBackground,
-	user,
 	movieData,
 	setMovieData,
 	addToWatchList,
 	removeFromWatchList,
 	checkIfFavorite,
+	localSave,
+	setlocalSave,
+	saveData,
+	getData,
 }) {
 	const [request, setRequest] = useState('');
 	const [searchInput, setSearchInput] = useState('');
 	const [movie, setMovie] = useState('');
 	const [dropDownList, setDropDownList] = useState([]);
-	const [localSave, setlocalSave] = useState(false);
 
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
@@ -50,29 +44,6 @@ export default function MainContent({
 			} else return;
 		});
 	}, [movieData]);
-
-	async function getData(userId) {
-		const dataRef = doc(db, 'watchlist', userId);
-		getDoc(dataRef)
-			.then((snapshot) => {
-				if (snapshot.exists()) {
-					console.log(snapshot.data().movie);
-					setMovieData(snapshot.data().movie);
-				} else console.info('snapshot not found');
-			})
-			.catch((err) => console.info(err));
-	}
-
-	async function saveData(userId) {
-		try {
-			const watchListRef = doc(db, 'watchlist', userId);
-			await setDoc(watchListRef, { movie: movieData });
-			console.log('saved to database');
-		} catch (err) {
-			console.info(err);
-			console.info('failed to save');
-		}
-	}
 
 	useEffect(() => {
 		fetchData('Naruto')
@@ -98,6 +69,7 @@ export default function MainContent({
 	async function handleRequest() {
 		try {
 			const data = await fetchData(request);
+      console.log(`results: ${data.results}`);
 			data.results[0]
 				? setMovie(data.results[0])
 				: console.warn('Not found.');
@@ -124,17 +96,6 @@ export default function MainContent({
 		}
 	}
 
-	function returnMovieData(id) {
-		const apiKey = '67e2da4e137cc7ee4732edd315ed8cab';
-		fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}`)
-			.then((response) => response.json())
-			.then((data) => {
-				setMovieData([...movieData, data]);
-				console.log(data);
-			})
-			.catch((error) => console.log(error));
-	}
-
 	return (
 		<div className="main">
 			<SearchSection
@@ -146,6 +107,7 @@ export default function MainContent({
 				handleRequest={handleRequest}
 				handleChange={handleChange}
 				request={request}
+        movie={movie}
 			/>
 			<InfoSection
 				movie={movie}

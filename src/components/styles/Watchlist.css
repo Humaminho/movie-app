@@ -19,4 +19,15 @@
 .watchlist-movie {
   display: flex;
   position: relative;
+  gap: 1.5rem;
+}
+
+.watchlist-movie > img {
+  border-radius: 15px;
+}
+
+.watchlist-movie-info {
+  display: flex;
+  flex-direction: column;
+  padding: 1.2rem;
 }

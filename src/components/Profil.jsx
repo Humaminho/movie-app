@@ -17,6 +17,11 @@ export default function Profil({ setLogState }) {
 
 	return (
 		<div>
+			<Link to="/">
+				<button className="watch-list no-border-button">
+					Home
+				</button>
+			</Link>
 			<Link to="/watchlist">
 				<button className="watch-list no-border-button">
 					Watch list

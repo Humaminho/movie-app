@@ -28,7 +28,7 @@ export default function InfoSection({
 			/>
 			<div className="movie-info">
 				<p className="movie-title">
-					{movie && movie.title && movie.title.toUpperCase()}
+					{movie && movie.title.toUpperCase()}
 				</p>
 				{checkIfFavorite(movie) ? (
 					<svg

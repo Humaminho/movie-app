@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles/App.css';
-import { app, auth } from './firebase-config.jsx';
+import { auth } from './firebase-config.jsx';
 import { onAuthStateChanged } from 'firebase/auth';
 import Navbar from './navbar';
 import MainContent from './mainContent';
@@ -8,6 +8,8 @@ import Signup from './Signup';
 import Login from './Login';
 import Watchlist from './Watchlist';
 import { Route, Routes } from 'react-router-dom';
+import { db } from './firebase-config';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default function App() {
 	const [background, setBackground] = useState(
@@ -22,6 +24,29 @@ export default function App() {
 	const [popUpLoginState, setPopUpLoginState] = useState(false);
 
 	const [movieData, setMovieData] = useState([]);
+	const [localSave, setlocalSave] = useState(false);
+
+	async function getData(userId) {
+		const dataRef = doc(db, 'watchlist', userId);
+		getDoc(dataRef)
+			.then((snapshot) => {
+				if (snapshot.exists()) {
+					console.log(snapshot.data().movie);
+					setMovieData(snapshot.data().movie);
+				} else console.info('snapshot not found');
+			})
+			.catch((err) => console.info(err));
+	}
+
+	async function saveData(userId) {
+		try {
+			const watchListRef = doc(db, 'watchlist', userId);
+			await setDoc(watchListRef, { movie: movieData });
+			console.log('saved to database');
+		} catch (err) {
+			console.info('failed to save: ' + err);
+		}
+	}
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -45,11 +70,20 @@ export default function App() {
 	}, [user]);
 
 	function addToWatchList(movie) {
-		const newMovieData = [...movieData, movie];
-		setMovieData(newMovieData);
+    if (logState) {
+      const newMovieData = [...movieData, movie];
+      setMovieData(newMovieData);
+    } else {
+      setPopUpLoginState(true);
+    }
+
 	}
 
 	function removeFromWatchList(movie) {
+		if (logState) {
+			setPopUpLoginState(true);
+			console.log('user is logged in');
+		}
 		const newMovieData = movieData.filter((item) => item.id !== movie.id);
 		setMovieData(newMovieData);
 	}
@@ -82,15 +116,17 @@ export default function App() {
 					path="/"
 					element={
 						<MainContent
-							user={user}
 							setBackground={setBackground}
-							background={background}
 							setLayer={setLayer}
 							movieData={movieData}
 							setMovieData={setMovieData}
 							addToWatchList={addToWatchList}
 							removeFromWatchList={removeFromWatchList}
 							checkIfFavorite={checkIfFavorite}
+							getData={getData}
+							saveData={saveData}
+							localSave={localSave}
+							setlocalSave={setlocalSave}
 						/>
 					}
 				/>
@@ -99,10 +135,13 @@ export default function App() {
 					element={
 						<Watchlist
 							movieData={movieData}
-							setMovieData={setMovieData}
 							addToWatchList={addToWatchList}
 							removeFromWatchList={removeFromWatchList}
 							checkIfFavorite={checkIfFavorite}
+							getData={getData}
+							saveData={saveData}
+							localSave={localSave}
+							setlocalSave={setlocalSave}
 						/>
 					}
 				/>

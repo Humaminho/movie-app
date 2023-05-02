@@ -6,6 +6,7 @@ import {
 	browserLocalPersistence,
 } from 'firebase/auth';
 import { auth } from './firebase-config.jsx';
+import SignInWithGoogle from './SignInWithGoogle';
 
 export default function Login({
 	setLogState,
@@ -48,7 +49,7 @@ export default function Login({
 	}
 
 	return (
-		<form className="login-form">
+		<form className="login-form" onSubmit={(e) => e.preventDefault()}>
 			<div className="close" onClick={closePopUp}>
 				✖
 			</div>
@@ -82,6 +83,7 @@ export default function Login({
 			<button className="no-border-button" onClick={swap}>
 				Don't have an account? Sign-up!
 			</button>
+			<SignInWithGoogle />
 		</form>
 	);
 }

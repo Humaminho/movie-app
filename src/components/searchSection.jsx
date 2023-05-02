@@ -10,12 +10,11 @@ export default function SearchSection({
 	handleRequest,
 	handleChange,
 	request,
+  movie,
 }) {
 	function handleSubmit(e) {
 		e.preventDefault();
-		const title = dropDownList[0].title;
-		setRequest(title);
-		setSearchInput(title);
+		setRequest(searchInput);
 		handleRequest();
 		setDropDownList([]);
 	}
@@ -39,6 +38,7 @@ export default function SearchSection({
 				setSearchInput={setSearchInput}
 				setRequest={setRequest}
 				handleRequest={handleRequest}
+        handleSubmit={handleSubmit}
 			/>
 
 			<button type="submit" className="submit" onClick={handleRequest}>
