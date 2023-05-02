@@ -31,7 +31,6 @@ export default function App() {
 		getDoc(dataRef)
 			.then((snapshot) => {
 				if (snapshot.exists()) {
-					console.log(snapshot.data().movie);
 					setMovieData(snapshot.data().movie);
 				} else console.info('snapshot not found');
 			})
@@ -42,7 +41,6 @@ export default function App() {
 		try {
 			const watchListRef = doc(db, 'watchlist', userId);
 			await setDoc(watchListRef, { movie: movieData });
-			console.log('saved to database');
 		} catch (err) {
 			console.info('failed to save: ' + err);
 		}
@@ -80,10 +78,6 @@ export default function App() {
 	}
 
 	function removeFromWatchList(movie) {
-		if (logState) {
-			setPopUpLoginState(true);
-			console.log('user is logged in');
-		}
 		const newMovieData = movieData.filter((item) => item.id !== movie.id);
 		setMovieData(newMovieData);
 	}

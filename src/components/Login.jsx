@@ -23,8 +23,6 @@ export default function Login({
 				signIn(auth, loginEmail, loginPassword)
 					.then((cred) => {
 						setLogState(true);
-						console.log(cred.user);
-						console.log('logged in');
 						setLoginEmail('');
 						setLoginPassword('');
 						closePopUp();
@@ -32,7 +30,6 @@ export default function Login({
 					.catch((err) => {
 						console.info(err);
 					});
-				console.log('Setting persistence succeded');
 			})
 			.catch((err) => {
 				console.info(`Setting persistence failed: ${err}`);

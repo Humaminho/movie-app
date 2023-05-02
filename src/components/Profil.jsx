@@ -4,14 +4,13 @@ import { auth } from './firebase-config.jsx';
 import { Link } from 'react-router-dom';
 
 export default function Profil({ setLogState }) {
-	function handleProfilClick() {
+	function handleLogOutClick() {
 		signOut(auth)
 			.then(() => {
-				console.log('logged out');
 				setLogState(false);
 			})
 			.catch((err) => {
-				console.info(err);
+				console.info('Error: ' + err);
 			});
 	}
 
@@ -28,8 +27,7 @@ export default function Profil({ setLogState }) {
 				</button>
 			</Link>
 			<button
-				className="profil no-border-button"
-				onClick={handleProfilClick}
+				onClick={handleLogOutClick}
 			>
 				Log-out
 			</button>

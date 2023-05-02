@@ -3,12 +3,12 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore, collection } from 'firebase/firestore';
 
 const firebaseConfig = {
-	apiKey: 'AIzaSyAMpb0M2PtoWI0FBDnsyLMxlQa7In0RSeY',
-	authDomain: 'netflix-blue.firebaseapp.com',
-	projectId: 'netflix-blue',
-	storageBucket: 'netflix-blue.appspot.com',
-	messagingSenderId: '874817663168',
-	appId: '1:874817663168:web:5a14a02312d0e202bbbd25',
+	apiKey: process.env.REACT_APP_API_KEY,
+	authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+	projectId: process.env.REACT_APP_PROJECT_ID,
+	storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+	messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+	appId: process.env.REACT_APP_APP_ID,
 };
 
 const app = initializeApp(firebaseConfig);
@@ -16,9 +16,6 @@ const auth = getAuth();
 const provider = new GoogleAuthProvider();
 
 const db = getFirestore();
-
-// grab collection reference:
-
 const colRef = collection(db, 'watchlist');
 
 export { app, auth, provider, db, collection };

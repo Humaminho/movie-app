@@ -24,7 +24,6 @@ export default function Signup({
 				if (password === passConfirm) {
 					createUser(auth, email, password)
 						.then((cred) => {
-							console.log('User created', cred.user.email);
 							setEmail('');
 							setPassword('');
 							setPassConfirm('');
@@ -37,7 +36,6 @@ export default function Signup({
 				} else {
 					alert("Passwords don't match");
 				}
-				console.log('Setting persistence succeded');
 			})
 			.catch((err) => {
 				console.info(`Setting persistence failed: ${err}`);

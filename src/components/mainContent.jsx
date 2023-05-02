@@ -69,7 +69,6 @@ export default function MainContent({
 	async function handleRequest() {
 		try {
 			const data = await fetchData(request);
-      console.log(`results: ${data.results}`);
 			data.results[0]
 				? setMovie(data.results[0])
 				: console.warn('Not found.');

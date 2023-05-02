@@ -11,7 +11,7 @@ export default function DropDown({
 }) {
 	return (
 		<div className="dropdown">
-			{dropDownList !== [] &&
+			{dropDownList.length > 0 &&
 				dropDownList
 					.filter((item) => {
 						const searchTerm = searchInput.toLowerCase();

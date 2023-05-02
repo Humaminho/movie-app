@@ -18,10 +18,6 @@ export default function Watchlist({
 		return formated;
 	}
 
-	movieData.map((movie) => {
-		console.log(movie.title);
-	});
-
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
 			if (user) {
@@ -47,7 +43,7 @@ export default function Watchlist({
 		<div className="watchlist">
 			<h1>Watch list</h1>
 			<ul className="watchlist-movies">
-				{movieData.map((movie) => (
+				{ movieData.length > 0 ? (movieData.map((movie) => (
 					<li key={movie.id} className="watchlist-movie">
 						<img
 							src={
@@ -105,7 +101,7 @@ export default function Watchlist({
 							</svg>
 						)}
 					</li>
-				))}
+				))) : (<p className='no-movies'> No movies to watch :/ </p>)}
 			</ul>
 		</div>
 	);

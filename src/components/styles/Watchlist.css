@@ -31,3 +31,9 @@
   flex-direction: column;
   padding: 1.2rem;
 }
+
+.no-movies {
+  text-align: center;
+  font-size: 1.2rem;
+  color: rgb(145, 145, 145);
+}

@@ -7,7 +7,7 @@ export default function SignInWithGoogle() {
   function handleClick() {
     signInWithPopup(auth, provider)
       .then((cred) => {
-        console.log(cred.user);
+        return;
       })
       .catch((err) => {
         console.info(err);
