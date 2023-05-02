@@ -3,12 +3,12 @@ import { getAuth, GoogleAuthProvider } from 'firebase/auth';
 import { getFirestore, collection } from 'firebase/firestore';
 
 const firebaseConfig = {
-	apiKey: process.env.API_KEY,
-	authDomain: process.env.AUTH_DOMAIN,
-	projectId: process.env.PROJECT_ID,
-	storageBucket: process.env.STORAGE_BUCKET,
-	messagingSenderId: process.env.MESSAGING_SENDER_ID,
-	appId: process.env.APP_ID,
+	apiKey: "AIzaSyCYN9tgHO_sKOKg8qMDWi64CjXHcpI2iGU",
+	authDomain: "netflix - bluee.firebaseapp.com",
+	projectId: "netflix - bluee",
+	storageBucket: "netflix - bluee.appspot.com",
+	messagingSenderId: "618983987069",
+	appId: "618983987069:web:7942da79e79a1ce48a5e14",
 };
 
 const app = initializeApp(firebaseConfig);
