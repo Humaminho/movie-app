@@ -4,7 +4,7 @@ import { getFirestore, collection } from 'firebase/firestore';
 
 const firebaseConfig = {
 	apiKey: 'AIzaSyArh8Iop9AgyKd7SkFOm7C8PL10Tx04y98',
-	authDomain: 'netflix-blueee.firebaseapp.com',
+	authDomain: 'chillandnetflix.netlify.app',
 	projectId: 'netflix-blueee',
 	storageBucket: 'netflix-blueee.appspot.com',
 	messagingSenderId: '808273212835',
