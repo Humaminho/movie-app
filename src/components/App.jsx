@@ -3,6 +3,7 @@ import './styles/App.css';
 import Navbar from './navbar';
 import MainContent from './mainContent';
 import { Route, Routes } from 'react-router-dom';
+import Footer from './footer.jsx';
 
 export default function App() {
 	const [background, setBackground] = useState(
@@ -35,6 +36,7 @@ export default function App() {
 					}
 				/>
 			</Routes>
+      <Footer />
 		</div>
 	);
 }

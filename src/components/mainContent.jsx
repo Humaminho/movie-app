@@ -30,7 +30,9 @@ export default function MainContent({
 				`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${req}`
 			);
 			const data = await response.json();
+      console.log(data)
 			return data;
+
 		} catch (error) {
 			console.warn('Error: ' + error);
 		}

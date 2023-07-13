@@ -10,17 +10,15 @@ export default function InfoSection({
 
 	return (
 		<div className="info-section">
-			<img
-				className="movie-photo"
-				src={
-					movie.poster_path
-						? 'https://image.tmdb.org/t/p/w500' + movie.poster_path
-						: './src/assets/notfound.png'
-				}
-				alt={movie && movie.title + ' poster picture'}
-				height="480px"
-				width="300px"
-			/>
+        <img
+          className="movie-photo"
+          src={
+            movie.poster_path
+              ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path
+              : './src/assets/notfound.png'
+          }
+          alt={movie && movie.title + ' poster picture'}
+        />
 			<div className="movie-info">
 				<p className="movie-title">
 					{movie && movie.title.toUpperCase()}
@@ -46,7 +44,7 @@ export default function InfoSection({
 				</div>
 				<div className="text-section">
 					<p className="blue">Description:</p>
-					<p className="description big white">
+					<p className="description">
 						{movie && movie.overview}
 					</p>
 				</div>
