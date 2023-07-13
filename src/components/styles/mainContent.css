@@ -14,11 +14,10 @@
 	width: 600px;
 	border-radius: 50px 0px 0px 50px;
 	border: 1px solid transparent;
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	padding: 0.6em 1.2em;
 	background-color: var(--black);
 	cursor: pointer;
-	transition: all 250ms;
 	outline: none;
 	color: var(--white);
 
@@ -63,22 +62,15 @@ p {
 }
 .movie-title {
 	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-	font-size: 2rem;
+	font-size: 1.5rem;
 	font-weight: bold;
 	color: white;
 	margin-right: 2rem;
 }
-.blue {
-	color: var(--blue);
-	font-size: 1rem;
-}
-.big {
-	font-size: 1.5rem;
-}
+
 .description {
 	max-height: 200px;
 	overflow-y: scroll;
-	font-size: 1.3rem;
 	padding-right: 0.8rem;
 }
 .text-section {
@@ -86,7 +78,7 @@ p {
 	flex-direction: column;
 	gap: 5px;
 }
-.text-section:nth-child(5) {
+.popularity {
 	margin-top: auto;
 	align-self: flex-end;
 	margin: auto 1rem 1rem 1rem;

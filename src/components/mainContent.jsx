@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import './styles/mainContent.css';
 import InfoSection from './infoSection';
 import SearchSection from './searchSection';
-import { auth } from './firebase-config';
-import { onAuthStateChanged } from 'firebase/auth';
 const log = console.log;
 
 export default function MainContent({
@@ -11,39 +9,11 @@ export default function MainContent({
 	setBackground,
 	movieData,
 	setMovieData,
-	addToWatchList,
-	removeFromWatchList,
-	checkIfFavorite,
-	localSave,
-	setlocalSave,
-	saveData,
-	getData,
 }) {
 	const [request, setRequest] = useState('');
 	const [searchInput, setSearchInput] = useState('');
 	const [movie, setMovie] = useState('');
 	const [dropDownList, setDropDownList] = useState([]);
-
-	useEffect(() => {
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				const userId = user.uid;
-				getData(userId);
-				setlocalSave(true);
-			} else return;
-		});
-	}, []);
-
-	useEffect(() => {
-		onAuthStateChanged(auth, (user) => {
-			if (user) {
-				if (localSave) {
-					const userId = user.uid;
-					saveData(userId);
-				} else return;
-			} else return;
-		});
-	}, [movieData]);
 
 	useEffect(() => {
 		fetchData('Naruto')
@@ -112,9 +82,6 @@ export default function MainContent({
 				movie={movie}
 				movieData={movieData}
 				setMovieData={setMovieData}
-				addToWatchList={addToWatchList}
-				removeFromWatchList={removeFromWatchList}
-				checkIfFavorite={checkIfFavorite}
 			></InfoSection>
 		</div>
 	);

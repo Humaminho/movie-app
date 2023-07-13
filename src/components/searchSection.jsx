@@ -10,8 +10,8 @@ export default function SearchSection({
 	handleRequest,
 	handleChange,
 	request,
-  movie,
 }) {
+  
 	function handleSubmit(e) {
 		e.preventDefault();
 		setRequest(searchInput);
