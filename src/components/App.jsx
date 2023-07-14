@@ -10,8 +10,6 @@ export default function App() {
 		'https://image.tmdb.org/t/p/w1280/l8ubUlfzlB5R2j9cJ3CN7tj0gmd.jpg'
 	);
 
-	const [layer, setLayer] = useState('layer');
-
 	const [movieData, setMovieData] = useState([]);
 
 	return (
@@ -29,7 +27,6 @@ export default function App() {
 					element={
 						<MainContent
 							setBackground={setBackground}
-							setLayer={setLayer}
 							movieData={movieData}
 							setMovieData={setMovieData}
 						/>

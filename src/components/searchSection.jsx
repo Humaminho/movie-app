@@ -1,17 +1,44 @@
 import React from 'react';
 import DropDown from './dropdown';
+import { useState } from 'react';
 
 export default function SearchSection({
-	dropDownList,
-	setDropDownList,
-	searchInput,
-	setSearchInput,
-	setRequest,
-	handleRequest,
-	handleChange,
-	request,
+	fetchMovieResults,
+	setMovie,
+	setBackground,
 }) {
-  
+	const [request, setRequest] = useState('');
+	const [searchInput, setSearchInput] = useState('');
+	const [dropDownList, setDropDownList] = useState([]);
+
+	async function handleRequest() {
+		try {
+			const data = await fetchMovieResults(request);
+			data[0] ? setMovie(data[0]) : console.warn('Not found.');
+			const path = data[0].backdrop_path;
+			// setLayer('layer on');
+			setTimeout(() => {
+				setBackground(`https://image.tmdb.org/t/p/w1280${path}`);
+				// setLayer('layer');
+			}, 500);
+		} catch (error) {
+			console.warn('Error: ' + error);
+		}
+	}
+
+	async function handleChange(e) {
+		setRequest(e.target.value);
+		setSearchInput(e.target.value);
+
+		try {
+			const response = await fetchMovieResults(searchInput);
+			console.log(response);
+			setDropDownList(response);
+		} catch (error) {
+			console.warn('Error: list not retreived');
+		}
+	}
+
 	function handleSubmit(e) {
 		e.preventDefault();
 		setRequest(searchInput);
@@ -38,7 +65,7 @@ export default function SearchSection({
 				setSearchInput={setSearchInput}
 				setRequest={setRequest}
 				handleRequest={handleRequest}
-        handleSubmit={handleSubmit}
+				handleSubmit={handleSubmit}
 			/>
 
 			<button type="submit" className="submit" onClick={handleRequest}>
