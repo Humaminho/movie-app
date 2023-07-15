@@ -7,13 +7,12 @@ export default function SearchSection({
 	setMovie,
 	setBackground,
 }) {
-	const [request, setRequest] = useState('');
 	const [searchInput, setSearchInput] = useState('');
 	const [dropDownList, setDropDownList] = useState([]);
 
 	async function handleRequest() {
 		try {
-			const data = await fetchMovieResults(request);
+			const data = await fetchMovieResults(searchInput);
 			data[0] ? setMovie(data[0]) : console.warn('Not found.');
 			const path = data[0].backdrop_path;
 			// setLayer('layer on');
@@ -27,12 +26,10 @@ export default function SearchSection({
 	}
 
 	async function handleChange(e) {
-		setRequest(e.target.value);
 		setSearchInput(e.target.value);
 
 		try {
 			const response = await fetchMovieResults(searchInput);
-			console.log(response);
 			setDropDownList(response);
 		} catch (error) {
 			console.warn('Error: list not retreived');
@@ -41,7 +38,6 @@ export default function SearchSection({
 
 	function handleSubmit(e) {
 		e.preventDefault();
-		setRequest(searchInput);
 		handleRequest();
 		setDropDownList([]);
 	}
@@ -51,7 +47,7 @@ export default function SearchSection({
 			<input
 				type="search"
 				className="search"
-				value={request}
+				value={searchInput}
 				onClick={handleChange}
 				onChange={handleChange}
 				onBlur={() => setTimeout(() => setDropDownList([]), 100)}
@@ -63,12 +59,12 @@ export default function SearchSection({
 				setDropDownList={setDropDownList}
 				searchInput={searchInput}
 				setSearchInput={setSearchInput}
-				setRequest={setRequest}
-				handleRequest={handleRequest}
-				handleSubmit={handleSubmit}
+				fetchMovieResults={fetchMovieResults}
+				setMovie={setMovie}
+				setBackground={setBackground}
 			/>
 
-			<button type="submit" className="submit" onClick={handleRequest}>
+			<button type="submit" className="btn search-btn" onClick={handleRequest}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="20"

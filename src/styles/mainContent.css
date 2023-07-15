@@ -7,14 +7,14 @@
 }
 
 .search-section {
-  align-self: stretch;
+	align-self: stretch;
 	display: flex;
-  justify-content: center;
+	justify-content: center;
 	position: relative;
 }
 
 .search {
-  width: 460px;
+	width: 460px;
 	border-radius: 50px 0px 0px 50px;
 	border: 1px solid transparent;
 	font-size: 1.1rem;
@@ -24,18 +24,19 @@
 	outline: none;
 	color: var(--white);
 
-	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .search:focus {
 	border-color: var(--blue);
 }
 
-.submit {
+.search-btn {
+	border: 1px solid transparent;
 	border-radius: 0px 50px 50px 0px;
 	border-left: 0px;
 }
-
-.submit:hover {
+.search-btn:hover {
+	border: 1px solid var(--blue);
 	border-left: 0px;
 }
 
@@ -47,24 +48,24 @@
 	gap: 1rem;
 }
 .movie-photo {
-  max-width: 520px;
-  order: 2;
-  border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  align-self: stretch;
+	max-width: 520px;
+	order: 2;
+	border-radius: 20px;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+	align-self: stretch;
 }
 
 .movie-info {
-  max-width: 520px;
-  max-height: 500px;
+	max-width: 520px;
+	max-height: 500px;
 	order: 1;
 	position: relative;
 	display: flex;
 	flex-direction: column;
 	gap: 1rem;
-	background-color: rgb(24, 24, 24);
+	background-color: var(--bg);
 	border-radius: 20px;
-	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	padding: 1rem 2rem;
 	justify-content: flex-start;
 }
@@ -102,11 +103,10 @@
 
 .description::-webkit-scrollbar-track {
 	background: transparent;
-	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
 .description::-webkit-scrollbar-thumb {
-	background-color: rgba(114, 114, 114, 0.252);
+	background-color: var(--bg);
 	border-radius: 25px;
 }
 
@@ -121,7 +121,7 @@
 	color: rgb(255, 196, 0);
 }
 @media only screen and (min-width: 590px) {
-  .movie-photo {
+	.movie-photo {
 		align-self: center;
 	}
 }
@@ -134,14 +134,11 @@
 	}
 	.movie-info {
 		order: 2;
-    max-width: 480px;
+		max-width: 480px;
 	}
 	.movie-photo {
 		order: 1;
-    max-width: 300px;
-    align-self: stretch;
+		max-width: 300px;
+		align-self: stretch;
 	}
-  .description {
-    
-  }
 }

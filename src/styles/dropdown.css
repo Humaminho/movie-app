@@ -1,14 +1,14 @@
 .dropdown {
   position: absolute;
   top: 50px;
-  width: 600px;
+  max-width: 550px;
   display: flex;
   flex-direction: column;
   max-height: 230.15px;
   overflow: hidden;
 
   background-color: transparent;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   border-radius: 25px;
   z-index: 5;
 }
@@ -17,13 +17,13 @@
   width: 600px;
   font-size: 1.1rem;
   padding: 0.6em 1.2em;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color:  var(--bg);
   cursor: pointer;
   outline: none;
   color: var(--white);
 }
 .drop-down-item:hover {
-  background-color: black;
+  background-color: var(--black);
   color: white;
 }
 .drop-down-item:first-child {

@@ -1,0 +1,15 @@
+.footer {
+  background-color: var(--black);
+  margin-top: 3rem;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+}
+.footer-content {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  padding: 1rem 2rem;
+  gap: 1rem;
+}
+.github-icon {
+  color: var(--white);
+}

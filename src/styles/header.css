@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  font-weight: bold;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+}
+
+.form-input {
+  width: 460px;
+	border-radius: 50px 0px 0px 50px;
+	border: 1px solid transparent;
+	font-size: 1.1rem;
+	padding: 0.6em 1.2em;
+	background-color: var(--black);
+	cursor: pointer;
+	outline: none;
+	color: var(--white);
+
+	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.auth-links {
+  display: flex;
+  gap: 1rem;
+}

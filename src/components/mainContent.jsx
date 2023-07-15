@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import './styles/mainContent.css';
+import '../styles/mainContent.css';
 import InfoSection from './infoSection';
 import SearchSection from './searchSection';
 const log = console.log;
@@ -14,7 +14,6 @@ export default function MainContent({ setBackground }) {
 				`https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&query=${req}`
 			);
 			const data = await response.json();
-			console.log(data);
 			return data.results;
 		} catch (error) {
 			console.warn('Error: ' + error);

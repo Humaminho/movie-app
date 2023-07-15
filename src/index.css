@@ -15,7 +15,20 @@
 	--black: #131313;
 	--white: rgba(255, 255, 255, 0.87);
 	--blue: #535bf2;
-	--blue-hover: rgba(94, 101, 242, 0.619);
+	--blue-hover: rgb(77, 83, 204);
+  --bg: rgb(24, 24, 24);
+}
+
+html::-webkit-scrollbar {
+	width: 12px;
+}
+
+html::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+	background-color: var(--blue);
 }
 
 * {

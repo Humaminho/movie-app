@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 export default function InfoSection({
 	movie,
@@ -8,6 +8,10 @@ export default function InfoSection({
 		return formated;
 	}
 
+  useEffect(() => {
+    console.log(movie)
+  }, [movie])
+
 	return (
 		<div className="info-section">
         <img
@@ -15,7 +19,7 @@ export default function InfoSection({
           src={
             movie.poster_path
               ? 'https://image.tmdb.org/t/p/w500' + movie.poster_path
-              : './src/assets/notfound.png'
+              : './src/assets/img/notfound.png'
           }
           alt={movie && movie.title + ' poster picture'}
         />
