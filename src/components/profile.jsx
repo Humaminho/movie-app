@@ -1,14 +1,22 @@
-import React from 'react';
-import LogoutBtn from './auth/logout-btn';
+'use client';
+import {React, useContext, useEffect} from 'react';
+import userContext from '../contexts/user-context';
+import favoritesContext from '../contexts/favorites-context';
 
 const Profile = () => {
+
+  const [user, setUser] = useContext(userContext);
+  const [favorites, setFavorites] = useContext(favoritesContext);
+
+  console.log(user.uid);
+
 	return (
 		<>
 			<nav>
-				<p>Welcome To your Profile page</p>
+				<p>Welcome </p>
 
 				<div>
-					<LogoutBtn />
+
 				</div>
 			</nav>
 		</>
