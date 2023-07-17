@@ -1,8 +1,9 @@
 import { useContext } from 'react';
-import '../styles/header.css';
 import { Link } from 'react-router-dom';
+import ProfileBtn from './profile-btn';
+import '../styles/header.css';
 import LogoutBtn from './auth/logout-btn';
-import userContext from '../contexts/user-context';
+import { userContext } from '../utils/contexts';
 
 export default function Navbar() {
 	const [user, setUser] = useContext(userContext);
@@ -13,14 +14,17 @@ export default function Navbar() {
 				BLUEVIES
 			</Link>
 			{user ? (
-				<LogoutBtn />
+				<div className="auth-links">
+					<LogoutBtn />
+					<ProfileBtn />
+				</div>
 			) : (
 				<div className="auth-links">
 					<Link to="/sign-in" className="btn">
 						Sign in
 					</Link>
-					<Link to="/sign-up" className="btn">
-						Sign up
+					<Link to="/sign-up" className="no-fill-btn">
+						Register
 					</Link>
 				</div>
 			)}

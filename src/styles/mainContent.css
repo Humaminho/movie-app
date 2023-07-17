@@ -117,9 +117,6 @@
 	cursor: pointer;
 }
 
-.full {
-	color: rgb(255, 196, 0);
-}
 @media only screen and (min-width: 590px) {
 	.movie-photo {
 		align-self: center;

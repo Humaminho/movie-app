@@ -1,6 +1,5 @@
-import React from 'react';
 import DropDown from './dropdown';
-import { useState } from 'react';
+import { React, useState, useContext } from 'react';
 
 export default function SearchSection({
 	fetchMovieResults,
@@ -15,10 +14,8 @@ export default function SearchSection({
 			const data = await fetchMovieResults(searchInput);
 			data[0] ? setMovie(data[0]) : console.warn('Not found.');
 			const path = data[0].backdrop_path;
-			// setLayer('layer on');
 			setTimeout(() => {
 				setBackground(`https://image.tmdb.org/t/p/w1280${path}`);
-				// setLayer('layer');
 			}, 500);
 		} catch (error) {
 			console.warn('Error: ' + error);

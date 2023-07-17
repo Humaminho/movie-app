@@ -41,7 +41,26 @@
 	border-color: var(--blue);
 }
 .form-container > .btn {
-  outline: none;
-  border: none;
-  align-self: center;
+	outline: none;
+	border: none;
+	align-self: center;
+}
+
+.profil {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 37px;
+	width: 37px;
+	border: 1px solid var(--blue);
+	border-radius: 50%;
+	font-size: 1.5rem;
+	color: white;
+	background-color: var(--blue);
+	cursor: pointer;
+}
+
+.profil:hover {
+	background-color: var(--blue-hover);
+  color: white;
 }

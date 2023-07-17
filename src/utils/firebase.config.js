@@ -24,20 +24,20 @@ const db = getFirestore();
 
 const collectionRef = collection(db, 'users');
 
-getDocs(collectionRef)
-  .then((snapshot) => {
-    console.log(snapshot.docs[0].data())
-  })
-  .catch((err) => {
-    console.info(err)
-  });
+// getDocs(collectionRef)
+//   .then((snapshot) => {
+//     console.log(snapshot.docs[0].data())
+//   })
+//   .catch((err) => {
+//     console.info(err)
+//   });
 
 const docRef = doc(db, 'users', '1HdJKcsf9euCeorOQdVU');
 
-getDoc(docRef)
-  .then((doc) => {
-    console.log(doc.data(), doc.id);
-  })
+// getDoc(docRef)
+//   .then((doc) => {
+//     console.log(doc.data(), doc.id);
+//   })
 
 // updateDoc(docRef, {
 //   favorite: '[gon, killua]'
@@ -53,4 +53,4 @@ getDoc(docRef)
 //     console.log('worked')
 //   })
 
-export { firebaseConfig, auth };
+export { firebaseConfig, auth, collectionRef, db };

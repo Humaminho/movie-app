@@ -1,9 +1,9 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../utils/firebase';
-import userContext from '../../contexts/user-context';
+import { createUserWithEmailAndPassword as createUser } from 'firebase/auth';
+import { auth } from '../../utils/firebase.config';
+import { userContext } from '../../utils/contexts';
 
 const Signup = () => {
 	const [user, setUser] = useContext(userContext);
@@ -27,14 +27,7 @@ const Signup = () => {
 	async function onSubmit(e) {
 		e.preventDefault();
 		try {
-			const userCredential = await createUserWithEmailAndPassword(
-				auth,
-				email,
-				password
-			);
-
-      setUser(userCredential.user);
-			console.log(user);
+			const userCredential = await createUser(auth, email, password);
 			navigate('/');
 		} catch (error) {
 			const errorCode = error.code;
@@ -48,7 +41,7 @@ const Signup = () => {
 			<section>
 				<div>
 					<div className="auth-page">
-						<h1> Sign Up </h1>
+						<h1> Register </h1>
 						<form className="form-container" onSubmit={onSubmit}>
 							<div className="form">
 								<label htmlFor="email-address">Email</label>

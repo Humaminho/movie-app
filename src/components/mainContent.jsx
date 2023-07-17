@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../styles/mainContent.css';
 import InfoSection from './infoSection';
 import SearchSection from './searchSection';
-const log = console.log;
+import { movieContext } from '../utils/contexts';
 
 export default function MainContent({ setBackground }) {
-	const [movie, setMovie] = useState('');
+	const [movie, setMovie] = useContext(movieContext);
 
 	async function fetchMovieResults(req) {
 		const apiKey = '67e2da4e137cc7ee4732edd315ed8cab';

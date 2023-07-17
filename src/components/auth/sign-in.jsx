@@ -2,8 +2,8 @@ import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import '../../styles/auth.css';
-import { auth } from '../../utils/firebase';
-import userContext from '../../contexts/user-context';
+import { auth } from '../../utils/firebase.config';
+import { userContext } from '../../utils/contexts';
 
 const SignIn = () => {
 	const [user, setUser] = useContext(userContext);
@@ -33,7 +33,6 @@ const SignIn = () => {
 			);
 			if (userCredential.user) {
 				navigate('/profile');
-				setUser(userCredential.user);
 			}
 		} catch (error) {
 			const errorCode = error.code;
@@ -82,7 +81,7 @@ const SignIn = () => {
 						</form>
 
 						<p>
-							No account yet? <Link to="/sign-up">Sign up</Link>
+							No account yet? <Link to="/sign-up">Register</Link>
 						</p>
 					</div>
 				</section>
