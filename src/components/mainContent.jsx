@@ -20,14 +20,6 @@ export default function MainContent({ setBackground }) {
 		}
 	}
 
-	useEffect(() => {
-		fetchMovieResults('Naruto')
-			.then((data) => {
-				setMovie(data[0]);
-			})
-			.catch((error) => console.warn('Error: ' + error));
-	}, []);
-
 	return (
 		<div className="main">
 			<SearchSection

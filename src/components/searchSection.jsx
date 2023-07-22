@@ -1,5 +1,5 @@
 import DropDown from './dropdown';
-import { React, useState, useContext } from 'react';
+import { React, useState, useEffect } from 'react';
 
 export default function SearchSection({
 	fetchMovieResults,
@@ -9,16 +9,46 @@ export default function SearchSection({
 	const [searchInput, setSearchInput] = useState('');
 	const [dropDownList, setDropDownList] = useState([]);
 
-	async function handleRequest() {
+	useEffect(() => { // Default movie
+    handleRequest('Interstellar')
+		.then(() => console.log('Movie set'))
+		.catch((error) => console.info(error));
+	}, []);
+
+	async function handleRequest(req) {
 		try {
-			const data = await fetchMovieResults(searchInput);
+			const data = await fetchMovieResults(req || searchInput);
 			data[0] ? setMovie(data[0]) : console.warn('Not found.');
 			const path = data[0].backdrop_path;
+			const genreIds = data[0].genre_ids;
+			fetchGenreNames(genreIds);
+
 			setTimeout(() => {
 				setBackground(`https://image.tmdb.org/t/p/w1280${path}`);
 			}, 500);
 		} catch (error) {
 			console.warn('Error: ' + error);
+		}
+	}
+
+	async function fetchGenreNames(genreIds) {
+		const apiKey = '67e2da4e137cc7ee4732edd315ed8cab';
+		const genreEndpoint = `https://api.themoviedb.org/3/genre/movie/list?api_key=${apiKey}`;
+
+		try {
+			const response = await fetch(genreEndpoint);
+			const data = await response.json();
+			const genreMap = new Map();
+			data.genres.forEach((genre) => {
+				genreMap.set(genre.id, genre.name);
+			});
+
+			const genreNames = genreIds.map((id) => genreMap.get(id));
+			setMovie((prev) => ({ ...prev, genres: genreNames }));
+			return genreNames;
+		} catch (error) {
+			console.error('Error fetching genre information:', error);
+			return [];
 		}
 	}
 
@@ -61,7 +91,11 @@ export default function SearchSection({
 				setBackground={setBackground}
 			/>
 
-			<button type="submit" className="btn search-btn" onClick={handleRequest}>
+			<button
+				type="submit"
+				className="btn search-btn"
+				onClick={handleRequest}
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					width="20"

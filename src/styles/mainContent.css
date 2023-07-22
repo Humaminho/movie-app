@@ -72,7 +72,7 @@
 
 .movie-title {
 	font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-	font-size: 1.2rem;
+	font-size: 1.6rem;
 	font-weight: bold;
 	color: white;
 	margin-right: 2rem;
@@ -82,9 +82,17 @@
 	overflow-y: hidden;
 	padding-right: 0.8rem;
 }
+.info-title {
+  color: var(--blue);
+  font-size: 0.9rem;
+}
+.info-text {
+  font-size: 1.2rem;
+}
 .description {
 	overflow-y: scroll;
 	padding-right: 0.8rem;
+  font-size: 1.2rem;
 }
 .text-section {
 	display: flex;

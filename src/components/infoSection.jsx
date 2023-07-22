@@ -1,12 +1,5 @@
-import React, { useEffect, useContext } from 'react';
-import {
-	userContext,
-	favoritesContext,
-	userDocContext,
-} from '../utils/contexts';
-import { getDocs, addDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
-import { onAuthStateChanged } from 'firebase/auth';
-import { collectionRef, auth, db } from '../utils/firebase.config';
+import React, { useContext } from 'react';
+import { favoritesContext } from '../utils/contexts';
 
 export default function InfoSection({ movie }) {
 	function formatDate(date) {
@@ -15,8 +8,6 @@ export default function InfoSection({ movie }) {
 	}
 
 	const [favorites, setFavorites] = useContext(favoritesContext);
-	const [user, setUser] = useContext(userContext);
-	const [userDoc, setUserDoc] = useContext(userDocContext);
 
 	function checkIfFavorite(movie) {
 		let isFavorite = false;
@@ -35,7 +26,6 @@ export default function InfoSection({ movie }) {
 			let isFavorite = checkIfFavorite(movie);
 			if (isFavorite === false) {
 				setFavorites([...favorites, movie]);
-				console.log(favorites);
 			}
 		}
 	}
@@ -86,22 +76,30 @@ export default function InfoSection({ movie }) {
 					</svg>
 				)}
 				<div className="text-section">
-					<p className="blue">Release date:</p>
-					<p className="big white">
+					<p className="info-title">Release date:</p>
+					<p className="info-text">
 						{movie
 							? formatDate(movie.release_date)
 							: 'Not available'}
 					</p>
 				</div>
 				<div className="text-section">
-					<p className="blue">Description:</p>
+					<p className="info-title">Genres:</p>
+					<p className="info-text">
+						{movie && movie.genres
+							? movie.genres.join(', ')
+							: 'Not available'}
+					</p>
+				</div>
+				<div className="text-section">
+					<p className="info-title">Description:</p>
 					<p className="description">
 						{movie ? movie.overview : 'Not available'}
 					</p>
 				</div>
 				<div className="text-section popularity">
-					<p className="blue">Popularity:</p>
-					<p className="big white">
+					<p className="info-title">Popularity:</p>
+					<p className="info-text">
 						{movie
 							? Math.floor(movie.popularity) + ' %'
 							: 'Not available'}

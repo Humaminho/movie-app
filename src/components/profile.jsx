@@ -9,6 +9,8 @@ const Profile = ({setBackground}) => {
 	const [favorites, setFavorites] = useContext(favoritesContext);
 	const [movie, setMovie] = useContext(movieContext);
 
+  //TODO: Fix setBackground
+
 	function handleClick(movie) {
     window.scrollTo(0, 0);
 		setTimeout(() => {

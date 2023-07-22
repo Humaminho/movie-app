@@ -20,7 +20,7 @@ import Profile from './profile';
 
 export default function App() {
 	const [background, setBackground] = useState(
-		'https://image.tmdb.org/t/p/w1280/l8ubUlfzlB5R2j9cJ3CN7tj0gmd.jpg'
+		'https://image.tmdb.org/t/p/w1280/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg'
 	);
 
 	const [user, setUser] = useState(null);
@@ -80,7 +80,6 @@ export default function App() {
 				})
 					.then(() => {
 						console.log('changed favorites');
-            console.log(favorites);
 					})
 					.catch((error) => {
 						console.info(error);
