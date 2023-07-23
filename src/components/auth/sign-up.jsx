@@ -1,9 +1,10 @@
 import React from 'react';
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { createUserWithEmailAndPassword as createUser } from 'firebase/auth';
+import { createUserWithEmailAndPassword as createUser, signInAnonymously } from 'firebase/auth';
 import { auth } from '../../utils/firebase.config';
 import { userContext } from '../../utils/contexts';
+import Demo from './demo';
 
 const Signup = () => {
 	const [user, setUser] = useContext(userContext);
@@ -78,7 +79,7 @@ const Signup = () => {
 
 						<p>
 							Already have an account?{' '}
-							<Link to="/sign-in">Sign in</Link>
+							<Link to="/sign-in">Sign in</Link> or Try out the <Demo />
 						</p>
 					</div>
 				</div>

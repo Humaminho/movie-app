@@ -9,10 +9,11 @@ export default function SearchSection({
 	const [searchInput, setSearchInput] = useState('');
 	const [dropDownList, setDropDownList] = useState([]);
 
-	useEffect(() => { // Default movie
-    handleRequest('Interstellar')
-		.then(() => console.log('Movie set'))
-		.catch((error) => console.info(error));
+	useEffect(() => {
+		// Default movie
+		handleRequest('Interstellar')
+			.then(() => console.log('Movie set'))
+			.catch((error) => console.info(error));
 	}, []);
 
 	async function handleRequest(req) {
@@ -22,7 +23,7 @@ export default function SearchSection({
 			const path = data[0].backdrop_path;
 			const genreIds = data[0].genre_ids;
 			fetchGenreNames(genreIds);
-
+      
 			setTimeout(() => {
 				setBackground(`https://image.tmdb.org/t/p/w1280${path}`);
 			}, 500);

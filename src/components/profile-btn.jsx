@@ -8,8 +8,10 @@ export default function ProfileBtn() {
   const [user, setUser] = useContext(userContext)
 
   function firstLetter() {
-    if (user) {
+    if ( user && user.email !== null ) {
       return user.email[0].toUpperCase()
+    } else {
+      return "D"
     }
   }
 
