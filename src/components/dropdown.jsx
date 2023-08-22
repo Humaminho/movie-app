@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react';
 import '../styles/dropdown.css';
 
 export default function DropDown({

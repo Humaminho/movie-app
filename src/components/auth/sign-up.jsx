@@ -79,7 +79,10 @@ const Signup = () => {
 
 						<p>
 							Already have an account?{' '}
-							<Link to="/sign-in">Sign in</Link> or Try out the <Demo />
+							<Link to="/sign-in" className="no-fill-btn">
+								Sign in
+							</Link>{' '}
+							or Try out the <Demo />
 						</p>
 					</div>
 				</div>

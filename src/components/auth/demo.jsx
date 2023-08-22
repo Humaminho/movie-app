@@ -7,7 +7,7 @@ export default function Demo() {
   
   const navigate = useNavigate();
 
-	async function handleDemo() {
+	async function createDemoAccount() {
 		try {
 			const userCredential = await signInAnonymously(auth);
 			navigate('/');
@@ -19,5 +19,9 @@ export default function Demo() {
 		}
 	}
 
-	return <a onClick={handleDemo}>Demo</a>;
+	return (
+		<a onClick={createDemoAccount} className="no-fill-btn">
+			Demo
+		</a>
+	);
 }

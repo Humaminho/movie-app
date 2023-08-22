@@ -30,11 +30,19 @@ li {
 }
 
 .no-fill-btn {
+  color: var(--blue);
   padding: 0.6rem 0.2rem;
 	background-color: transparent;
 	font-size: 1rem;
 	font-weight: 600;
 	font-family: inherit;
+}
+.no-fill-btn:visited {
+  color: var(--blue);
+}
+.no-fill-btn:hover {
+  color: var(--blue-hover);
+  cursor: pointer;
 }
 
 .btn:hover {

@@ -20,7 +20,7 @@ import Profile from './profile';
 
 export default function App() {
 	const [background, setBackground] = useState(
-		'https://image.tmdb.org/t/p/w1280/rAiYTfKGqDCRIIqo664sY9XZIvQ.jpg'
+		'https://image.tmdb.org/t/p/w1280/pbrkL804c8yAv3zBZR4QPEafpAR.jpg'
 	);
 
 	const [user, setUser] = useState(null);

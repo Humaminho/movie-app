@@ -4,6 +4,7 @@ import { React, useState, useEffect } from 'react';
 export default function SearchSection({
 	fetchMovieResults,
 	setMovie,
+  movie,
 	setBackground,
 }) {
 	const [searchInput, setSearchInput] = useState('');
@@ -11,9 +12,11 @@ export default function SearchSection({
 
 	useEffect(() => {
 		// Default movie
-		handleRequest('Interstellar')
+    if ( !movie ) {
+      handleRequest('Interstellar')
 			.then(() => console.log('Movie set'))
 			.catch((error) => console.info(error));
+    }
 	}, []);
 
 	async function handleRequest(req) {

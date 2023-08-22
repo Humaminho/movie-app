@@ -91,7 +91,7 @@ export default function InfoSection({ movie }) {
 							: 'Not available'}
 					</p>
 				</div>
-				<div className="text-section">
+				<div className="text-section description-section">
 					<p className="info-title">Description:</p>
 					<p className="description">
 						{movie ? movie.overview : 'Not available'}

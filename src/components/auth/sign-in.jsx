@@ -81,7 +81,7 @@ const SignIn = () => {
 						</form>
 
 						<p>
-							No account yet? <Link to="/sign-up">Register</Link>
+							No account yet? <Link to="/sign-up" className='no-fill-btn'>Register</Link>
 						</p>
 					</div>
 				</section>

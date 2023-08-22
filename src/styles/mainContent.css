@@ -45,12 +45,10 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 1rem;
 }
 .movie-photo {
 	max-width: 520px;
 	order: 2;
-	border-radius: 20px;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	align-self: stretch;
 }
@@ -64,7 +62,6 @@
 	flex-direction: column;
 	gap: 1rem;
 	background-color: var(--bg);
-	border-radius: 20px;
 	box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 	padding: 1rem 2rem;
 	justify-content: flex-start;
@@ -98,6 +95,10 @@
 	display: flex;
 	flex-direction: column;
 	gap: 5px;
+}
+.description-section {
+  flex-shrink: 1;
+  max-height: 200px
 }
 .popularity {
 	margin-top: auto;
